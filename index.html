@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>George Wood — Postdoc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --coral:    #FF7F6E;
+    --offwhite: #F5F2EE;
+    --mist:     #E7EFE6;
+    --sage:     #7AA78A;
+    --forest:   #2F4A3E;
+    --ink:      #1a2e26;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
+  body { background: var(--offwhite); color: var(--forest); font-family: 'Instrument Sans', sans-serif; font-weight: 300; overflow-x: hidden; font-size: 16px; max-width: 100%; }
+  nav { max-width: 100vw; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E"); pointer-events: none; z-index: 1000; opacity: 0.5; }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.6rem 5rem 1.8rem;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: color 0.4s, background 0.4s;
+    background: var(--nav-bg, rgba(26,46,38,0.55));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  }
+  .nav-logo { font-family: 'DM Mono', monospace; font-size: 0.90rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--nav-fg, var(--mist)); opacity: 0.65; transition: color 0.4s; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-family: 'DM Mono', monospace; font-size: 0.90rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--nav-fg, var(--mist)); text-decoration: none; opacity: 0.5; transition: opacity 0.2s, color 0.4s; }
+  .nav-links a:hover { opacity: 1; }
+  header { min-height: 75vh; display: grid; grid-template-columns: 75% 25%; position: relative; overflow: hidden; }
+  .hero-left { background: var(--forest); padding: 5rem; display: flex; flex-direction: column; justify-content: flex-end; position: relative; overflow: hidden; }
+  .hero-left::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(231,239,230,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(231,239,230,0.03) 1px, transparent 1px); background-size: 60px 60px; }
+  .hero-left::after { content: ''; position: absolute; bottom: -80px; left: -80px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(122,167,138,0.12) 0%, transparent 70%); pointer-events: none; }
+  .role-tag { font-family: 'DM Mono', monospace; font-size: 0.90rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(231,239,230,0.7); margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; position: relative; z-index: 1; text-decoration: underline;
+    text-decoration-color: currentcolor;
+  -webkit-text-decoration-color: red;
+  text-decoration-color: var(--coral);
+  text-underline-offset: 0.5rem;
+}
+  h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(4rem, 6.5vw, 6rem); font-weight: 300; line-height: 0.92; color: var(--offwhite); letter-spacing: -0.025em; opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s; position: relative; z-index: 1; }
+  h1 em { font-style: italic; color: var(--offwhite); }
+  .hero-tagline { margin-top: 2.5rem; font-size: 0.95rem; line-height: 1.8; color: rgba(231,239,230,0.5); max-width: 750px; opacity: 0; animation: fadeUp 0.8s ease forwards 0.6s; position: relative; z-index: 1; }
+  .hero-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2.5rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.8s; position: relative; z-index: 1; }
+  .badge { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.3rem 0.75rem; border: 1px solid rgba(231,239,230,0.3); color: rgba(231,239,230,0.85); cursor: default; transition: color 0.2s, border-color 0.2s; }
+  .badge:hover { color: var(--coral); border-color: rgba(255,127,110,0.6); }
+  .hero-right { background: var(--ink); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .hero-right::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(122,167,138,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(122,167,138,0.04) 1px, transparent 1px); background-size: 40px 40px; }
+  .rna-art { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  .rna-art svg { width: 65%; height: 85%; opacity: 0.12; }
+  .hero-stat-block { position: relative; z-index: 2; text-align: center; padding: 4rem; opacity: 0; animation: fadeIn 1s ease forwards 1s; }
+  .stat-number { font-family: 'Cormorant Garamond', serif; font-size: 6rem; font-weight: 300; color: var(--offwhite); line-height: 1; letter-spacing: -0.04em; }
+  .stat-label { font-family: 'DM Mono', monospace; font-size: 0.90rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(231,239,230,0.75); margin-top: 0.75rem; }
+  .stat-divider { width: 1px; background: rgba(122,167,138,0.3); margin: 2.5rem auto; }
+  .institution { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-style: italic; color: rgba(231,239,230,0.5); }
+  section { padding: 4rem 5rem; }
+  .section-label { font-family: 'DM Mono', monospace; font-size: 0.88rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--sage); margin-bottom: 3rem; display: flex; align-items: center; gap: 1rem; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--sage); opacity: 0.25; max-width: 80px; }
+
+
+  /* publications */
+  #publications { background: var(--offwhite); }
+  .pub-list { display: flex; flex-direction: column; }
+  .pub-loading { font-family: 'DM Mono', monospace; font-size: 0.78rem; letter-spacing: 0.1em; color: var(--sage); padding: 3rem 0; text-align: center; }
+  .pub-item { display: grid; grid-template-columns: 3.5rem 1fr auto; gap: 2.5rem; align-items: start; padding: 2rem 0; border-bottom: 1px solid rgba(47,74,62,0.1); position: relative; }
+  .pub-item::before { content: ''; position: absolute; left: -5rem; right: -5rem; top: 0; bottom: 0; background: rgba(47,74,62,0.03); opacity: 0; transition: opacity 0.25s; pointer-events: none; }
+  .pub-item:hover::before { opacity: 1; }
+  .pub-year { font-family: 'DM Mono', monospace; font-size: 0.90rem; letter-spacing: 0.1em; color: var(--sage); padding-top: 0.25rem; }
+  .pub-title { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 400; color: var(--forest); line-height: 1.35; margin-bottom: 0.45rem; }
+  .pub-title a { color: inherit; text-decoration: none; transition: color 0.2s; }
+  .pub-title a:hover { color: var(--sage); }
+  .pub-authors { font-size: 0.88rem; color: rgba(47,74,62,0.5); line-height: 1.5; }
+  .pub-authors strong { color: var(--forest); font-weight: 500; }
+  .pub-journal { font-family: 'DM Mono', monospace; font-size: 0.93rem ; letter-spacing: 0.07em; color: var(--sage); margin-top: 0.5rem; }
+  .pub-tags { display: flex; gap: 0.4rem; margin-top: 0.6rem; flex-wrap: wrap; align-items: center; }
+  .pub-tag { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.12rem 0.45rem; }
+  .tag-first { color: var(--coral); border: 1px solid rgba(255,127,110,0.5); }
+  .tag-preprint { color: var(--sage); border: 1px solid rgba(122,167,138,0.4); text-decoration: none; transition: background 0.2s; }
+  .tag-preprint:hover { background: rgba(122,167,138,0.1); }
+  .tag-review { color: rgba(47,74,62,0.45); border: 1px solid rgba(47,74,62,0.18); }
+  .pub-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 0.4rem; min-width: 80px; }
+  .pub-cite { font-family: 'DM Mono', monospace; font-size: 0.90rem; color: var(--coral); background: rgba(255,127,110,0.09); padding: 0.2rem 0.55rem; white-space: nowrap; text-decoration: none; transition: background 0.2s; }
+  .pub-cite:hover { background: rgba(255,127,110,0.18); }
+  .pub-cite-pre { font-family: 'DM Mono', monospace; font-size: 0.70rem; color: rgba(122,167,138,0.8); background: rgba(122,167,138,0.08); padding: 0.15rem 0.5rem; white-space: nowrap; text-decoration: none; transition: background 0.2s; }
+  .pub-cite-pre:hover { background: rgba(122,167,138,0.15); }
+
+  /* about */
+  #about { background: var(--forest); display: grid; grid-template-columns: 1fr 1fr; gap: 7rem; align-items: center; color: var(--offwhite); }
+  #about .section-label { color: var(--coral); }
+  #about .section-label::after { background: var(--coral); opacity: 0.4; }
+  .about-text h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 3.5vw, 3.2rem); font-weight: 300; line-height: 1.1; color: var(--offwhite); margin-bottom: 2rem; }
+  .about-text p { font-size: 0.95rem; line-height: 1.95; color: rgba(231,239,230,0.55); margin-bottom: 1rem; }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(231,239,230,0.08); border: 1px solid rgba(231,239,230,0.08); }
+  .about-stat { background: var(--forest); padding: 2rem 1.5rem; border-left: 2px solid transparent; transition: border-color 0.3s, background 0.3s; }
+  .about-stat:hover { border-left-color: var(--coral); background: rgba(255,127,110,0.04); }
+  .about-stat-number { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; color: var(--offwhite); line-height: 1; }
+  .about-stat-label { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); margin-top: 0.5rem; }
+
+  /* contact */
+  #contact { background: var(--offwhite); text-align: center; padding: 7rem 5rem; position: relative; }
+  #contact::before { content: ''; position: absolute; top: 0; left: 5rem; right: 5rem; height: 1px; background: rgba(47,74,62,0.12); }
+  #contact h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 300; color: var(--forest); margin-bottom: 0.75rem; }
+  #contact p { font-size: 0.90rem; color: rgba(47,74,62,0.45); margin-bottom: 3rem; font-family: 'DM Mono', monospace; letter-spacing: 0.08em; }
+  .contact-links { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+  .contact-link { font-family: 'DM Mono', monospace; font-size: 0.90rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--forest); text-decoration: none; padding: 0.85rem 1.8rem; border: 1px solid rgba(47,74,62,0.2); transition: background 0.25s, border-color 0.25s, color 0.25s; display: inline-flex; align-items: center; gap: 0.6rem; }
+  .contact-link:hover { background: var(--forest); border-color: var(--forest); color: var(--offwhite); }
+  .contact-link.primary { background: var(--forest); border-color: var(--forest); color: var(--offwhite); }
+  .contact-link.primary:hover { background: var(--coral); border-color: var(--coral); }
+  .contact-link svg { width: 1em; height: 1em; flex-shrink: 0; fill: currentColor; }
+
+  /* techniques */
+  #techniques { background: var(--ink); color: var(--mist); }
+  #techniques .section-label { color: var(--coral); }
+  #techniques .section-label::after { background: var(--coral); opacity: 0.4; }
+  .techniques-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(231,239,230,0.06); border: 1px solid rgba(231,239,230,0.06); }
+  @media (min-width: 901px) { .techniques-grid { grid-template-columns: repeat(3, 1fr); } }
+  .techniques-grid-row2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: rgba(231,239,230,0.06); border: 1px solid rgba(231,239,230,0.06); border-top: none; margin-top: 0; }
+  .techniques-card { background: var(--ink); padding: 2.5rem 2rem; transition: background 0.3s; }
+  .techniques-card:hover { background: rgba(255,127,110,0.04); }
+  .techniques-card-num { font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.2em; color: var(--coral); opacity: 0.7; margin-bottom: 1.5rem; display: block; }
+  .techniques-card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; color: var(--offwhite); margin-bottom: 1.25rem; line-height: 1.2; }
+  .techniques-list { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+  .techniques-list li { font-size: 0.88rem; line-height: 1.6; color: rgba(231,239,230,0.55); padding-left: 1rem; position: relative; }
+  .techniques-list li::before { content: '–'; position: absolute; left: 0; color: var(--coral); opacity: 0.5; }
+
+  /* career */
+  #career { background: var(--offwhite); }
+  .career-grid { display: grid; grid-template-columns: 1fr minmax(auto, 25%); gap: 0 6rem; }
+  .career-col-label { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sage); margin-bottom: 2rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(47,74,62,0.12); }
+  .career-item { display: grid; grid-template-columns: 7rem 1fr; gap: 1.5rem; padding: 1.75rem 0; border-bottom: 1px solid rgba(47,74,62,0.07); position: relative; }
+  .career-item:last-child { border-bottom: none; }
+  .career-item::before { content: ''; position: absolute; left: -5rem; right: -5rem; top: 0; bottom: 0; background: rgba(47,74,62,0.02); opacity: 0; transition: opacity 0.25s; pointer-events: none; }
+  .career-item:hover::before { opacity: 1; }
+  .career-dates { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; color: var(--sage); padding-top: 0.2rem; line-height: 1.5; }
+  .career-role { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 400; color: var(--forest); line-height: 1.25; margin-bottom: 0.3rem; }
+  .career-org { font-family: 'DM Mono', monospace; font-size: 0.90rem; letter-spacing: 0.08em; color: var(--sage); margin-bottom: 0.5rem; }
+  .career-desc { font-size: 0.90rem; line-height: 1.75; color: rgba(47,74,62,0.55); }
+  .career-tag { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral); border: 1px solid rgba(255,127,110,0.4); padding: 0.1rem 0.4rem; margin-top: 0.5rem; }
+
+
+  /* profile picture */
+  .hero-profile { display: flex; align-items: center; gap: 2rem; margin-bottom: 0; }
+  .profile-pic-wrap { flex-shrink: 0; }
+  .profile-pic { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(231,239,230,0.2); display: block; background: rgba(122,167,138,0.15); }
+  .profile-pic-placeholder { width: 90px; height: 90px; border-radius: 50%; border: 2px solid rgba(231,239,230,0.2); background: rgba(122,167,138,0.12); display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; }
+  .profile-pic-placeholder svg { width: 55%; height: 55%; opacity: 0.35; }
+
+  footer { background: var(--ink); padding: 1.75rem 5rem; display: flex; justify-content: space-between; align-items: center; }
+  footer span { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; color: rgba(231,239,230,0.25); }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  /* hamburger button */
+  .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; z-index: 200; }
+  .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--nav-fg, var(--mist)); border-radius: 2px; transition: transform 0.3s, opacity 0.3s, background 0.4s; }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* mobile dropdown */
+  .nav-mobile-menu {
+    display: none;
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 150;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    background: rgba(26,46,38,0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .nav-mobile-menu.open { opacity: 1; pointer-events: all; }
+  .nav-mobile-menu a {
+    font-family: 'DM Mono', monospace;
+    font-size: 1.1rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mist);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .nav-mobile-menu a:hover { opacity: 1; }
+
+  @media (max-width: 900px) {
+    header { grid-template-columns: 1fr; min-height: auto; }
+    .hero-right { min-height: 45vh; }
+    nav { padding: 1.2rem 1.25rem; width: 100vw; max-width: 100vw; left: 0; right: 0; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    .nav-mobile-menu { display: flex; }
+    section { padding: 5rem 2rem; }
+    .research-grid { grid-template-columns: 1fr; }
+    #about { grid-template-columns: 1fr; gap: 3rem; padding: 5rem 2rem; }
+    footer { padding: 1.5rem 2rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    .hero-left { padding: 8rem 2rem 4rem; }
+    .pub-item { grid-template-columns: 2.5rem 1fr; }
+    .pub-meta { display: none; }
+    .techniques-grid { grid-template-columns: 1fr; }
+    .techniques-grid-row2 { grid-template-columns: 1fr; border-top: 1px solid rgba(231,239,230,0.06); }
+    .career-grid { grid-template-columns: 1fr; }
+    .career-item { grid-template-columns: 5rem 1fr; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">GW / Dual wet &amp; dry lab biologist</span>
+  <ul class="nav-links">
+    <li><a href="#career">Career</a></li>
+    <li><a href="#techniques">Techniques</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="nav-mobile-menu" id="mobile-menu">
+  <a href="#career"       onclick="closeMenu()">Career</a>
+  <a href="#techniques"   onclick="closeMenu()">Techniques</a>
+  <a href="#publications" onclick="closeMenu()">Publications</a>
+  <a href="#contact"      onclick="closeMenu()">Contact</a>
+</div>
+
+<header>
+  <div class="hero-left">
+    <p class="role-tag">Postdoctoral Researcher</p>
+    <div class="hero-profile">
+      <img class="profile-pic" src="George-Wood.webp" alt="George Wood">
+      <h1>George<br><em>Wood</em></h1>
+    </div>
+    <p class="hero-tagline">Bridging computational analysis and experimental molecular biology to translate high-throughput omics data into validated mechanistic discoveries. Currently exploring how gene expression is reprogrammed during the host–microbe interaction.</p>
+    <div class="hero-badges">
+      <span class="badge">Bioinformatics</span>
+      <span class="badge">Multi-omics</span>
+      <span class="badge">RNA Biology</span>
+      <span class="badge">Host–Microbe Interactions</span>
+      <span class="badge">Translational Control</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="rna-art">
+      <svg viewBox="0 0 400 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M200 0 Q290 75 200 150 Q110 225 200 300 Q290 375 200 450 Q110 525 200 600" stroke="#7AA78A" stroke-width="2.5" fill="none"/>
+        <path d="M200 0 Q110 75 200 150 Q290 225 200 300 Q110 375 200 450 Q290 525 200 600" stroke="#7AA78A" stroke-width="2.5" fill="none"/>
+        <line x1="200" y1="37"  x2="263" y2="37"  stroke="#7AA78A" stroke-width="1.5"/>
+        <line x1="200" y1="112" x2="137" y2="112" stroke="#7AA78A" stroke-width="1.5"/>
+        <line x1="200" y1="187" x2="263" y2="187" stroke="#7AA78A" stroke-width="1.5"/>
+        <line x1="200" y1="262" x2="137" y2="262" stroke="#7AA78A" stroke-width="1.5"/>
+        <line x1="200" y1="337" x2="263" y2="337" stroke="#7AA78A" stroke-width="1.5"/>
+        <line x1="200" y1="412" x2="137" y2="412" stroke="#7AA78A" stroke-width="1.5"/>
+        <line x1="200" y1="487" x2="263" y2="487" stroke="#7AA78A" stroke-width="1.5"/>
+        <line x1="200" y1="562" x2="137" y2="562" stroke="#7AA78A" stroke-width="1.5"/>
+        <circle cx="200" cy="37"  r="4" fill="#7AA78A"/>
+        <circle cx="200" cy="112" r="4" fill="#7AA78A"/>
+        <circle cx="200" cy="187" r="4" fill="#7AA78A"/>
+        <circle cx="200" cy="262" r="4" fill="#7AA78A"/>
+        <circle cx="200" cy="337" r="4" fill="#7AA78A"/>
+        <circle cx="200" cy="412" r="4" fill="#7AA78A"/>
+        <circle cx="200" cy="487" r="4" fill="#7AA78A"/>
+        <circle cx="200" cy="562" r="4" fill="#7AA78A"/>
+      </svg>
+    </div>
+    <div class="hero-stat-block">
+      <div class="stat-number" id="hero-pub-count">8</div>
+      <div class="stat-label">Publications</div>
+      <div class="stat-divider"></div>
+      <div class="stat-number" id="hero-citations">—</div>
+      <div class="stat-label">Citations</div>
+      <div class="stat-divider"></div>
+      <div class="stat-number" id="hero-hindex">—</div>
+      <div class="stat-label">h-index</div>
+    </div>
+  </div>
+</header>
+
+
+<section id="career">
+  <div class="section-label">Career &amp; Education</div>
+  <div class="career-grid">
+
+    <!-- LEFT: Experience -->
+    <div>
+      <div class="career-col-label">Experience</div>
+
+      <div class="career-item reveal">
+        <span class="career-dates">2023 –<br>Present</span>
+        <div>
+          <div class="career-role">Postdoctoral Research Associate</div>
+          <div class="career-org">Chung Lab · Dept of Pathology, University of Cambridge</div>
+          <div class="career-desc">Characterised host and viral <em>cis</em>-acting RNA features including programmed ribosomal frameshifting, and developed reporter assays to evaluate therapeutics targeting non-canonical translation. Integrated transcriptomic, traslatomic and proteomic datasets to uncover novel gene expression regulation during mamalian and plant infection.</div>
+        </div>
+      </div>
+
+      <div class="career-item reveal">
+        <span class="career-dates">2019 –<br>2023</span>
+        <div>
+          <div class="career-role">Departmental PhD Studentship</div>
+          <div class="career-org">Chung Lab · Dept of Pathology, University of Cambridge</div>
+          <div class="career-desc">Investigated transcriptional and translational regulation in macrophages infected with <em>Salmonella</em> and <em>Listeria</em>, uncoupling the bacterial contributors to this response. Identified shared and distinct regulatory programmes across two highly divergent intracellular bacterial pathogens.</div>
+        </div>
+      </div>
+
+      <div class="career-item reveal">
+        <span class="career-dates">2019</span>
+        <div>
+          <div class="career-role">Research Internship</div>
+          <div class="career-org">Diagnostics for the Real World · Little Chesterford, UK</div>
+          <div class="career-desc">Supported the development, testing and regulatory compliance of automated point-of-care molecular diagnostics to detect infectious disease detection in resource-limited settings, reducing assay time by 30%.</div>
+        </div>
+      </div>
+
+      <div class="career-item reveal">
+        <span class="career-dates">2018</span>
+        <div>
+          <div class="career-role">MSci Research Project</div>
+          <div class="career-org">Mata Lab · Dept of Biochemistry, University of Cambridge</div>
+          <div class="career-desc">Characterised translational regulation of the transcription factor <em>fil1</em> in <em>S. pombe</em> upon activation of the amino acid starvation response.</div>
+        </div>
+      </div>
+
+      <div class="career-item reveal">
+        <span class="career-dates">2016</span>
+        <div>
+          <div class="career-role">BA Research Project, University of Cambridge</div>
+          <div class="career-org">Mott &amp; Owen Lab · Dept of Biochemistry</div>
+          <div class="career-desc">Purified and biophysically characterised the HR1c domain of human PRK1 and PRK3 to interrogate their structure and role in protein–protein interaction.</div>
+        </div>
+      </div>
+
+      <div class="career-item reveal">
+        <span class="career-dates">2015</span>
+        <div>
+          <div class="career-role">Visiting Summer Researcher </div>
+          <div class="career-org">Markowetz Lab · Cancer Research UK Cambridge Institute</div>
+          <div class="career-desc">Awarded Bill Willetts and Mays Wild Long Vacation research bursery to conducat a computational project supervised by Dr Andrew Holding. Generated a custom ChIP-Seq data analysis pipeline incorporating novel spike-based normalisation.</div>
+        </div>
+      </div>
+
+
+    </div>
+
+    <!-- RIGHT: Education -->
+    <div>
+      <div class="career-col-label">Education</div>
+
+      <div class="career-item reveal">
+        <span class="career-dates">2019 –<br>2023</span>
+        <div>
+          <div class="career-role">PhD, Pathology</div>
+          <div class="career-org">University of Cambridge</div>
+        </div>
+      </div>
+
+      <div class="career-item reveal">
+        <span class="career-dates">2013 –<br>2018</span>
+        <div>
+          <div class="career-role">BA (Hons) &amp; MSci Natural Sciences (Biochemistry)</div>
+          <div class="career-org">University of Cambridge</div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</section>
+
+
+<section id="techniques">
+  <div class="section-label">Skills &amp; Techniques</div>
+
+  <div class="techniques-grid">
+
+    <div class="techniques-card reveal">
+      <span class="techniques-card-num">01</span>
+      <h3 class="techniques-card-title">Bioinformatics</h3>
+      <ul class="techniques-list">
+        <li>Advanced scripting and data analysis in R &amp; Python</li>
+        <li>Multi-omics data integration and complex analysis</li>
+        <li>Quantitative processing pipelines for Proteomic, RNA-Seq, and Ribo-Seq data</li>
+        <li>Modeling of RNA structure and evolutionary conservation</li>
+        <li>Design and deployment of bespoke, reproducible bioinformatic pipelines</li>
+        <li>Development of interactive data visualisation tools using Shiny</li>
+      </ul>
+    </div>
+
+    <div class="techniques-card reveal reveal-delay-1">
+      <span class="techniques-card-num">02</span>
+      <h3 class="techniques-card-title">Next-Generation Sequencing</h3>
+      <ul class="techniques-list">
+        <li>Bespoke library design and protocol optimisation for novel sequencing applications</li>
+        <li>High-yield, high-purity isolation of DNA &amp; RNA</li>
+        <li>Ribosome profiling (Ribo-Seq)</li>
+        <li>Total, poly(A), and targeted RNA-Seq</li>
+        <li>End-to-end ownership of NGS workflows from sample preparation through data analysis</li>
+      </ul>
+    </div>
+
+    <div class="techniques-card reveal reveal-delay-2">
+      <span class="techniques-card-num">03</span>
+      <h3 class="techniques-card-title">Cell &amp; Infection Biology</h3>
+      <ul class="techniques-list">
+        <li>Mammalian cell culture (including primary cells)</li>
+        <li>Handling and manipulation of pathogens under containment</li>
+        <li>Immunofluorescent imaging and digital quantification</li>
+        <li>Multi-parameter flow cytometry</li>
+        <li>Transient transfection of DNA and RNA</li>
+        <li>Targeted CRISPR knockouts</li>
+      </ul>
+    </div>
+
+  </div>
+  <div class="techniques-grid-row2">
+
+    <div class="techniques-card reveal">
+      <span class="techniques-card-num">04</span>
+      <h3 class="techniques-card-title">Molecular Biology</h3>
+      <ul class="techniques-list">
+        <li>Advanced molecular cloning &amp; expression construct design</li>
+        <li>Novel reporter assay development</li>
+        <li>RT-qPCR validation and absolute/relative quantification</li>
+        <li><em>In vitro</em> transcription &amp; translation</li>
+        <li>Native and recombinant protein purification, biochemistry &amp; biophysical profiling</li>
+      </ul>
+    </div>
+
+    <div class="techniques-card reveal reveal-delay-1">
+      <span class="techniques-card-num">05</span>
+      <h3 class="techniques-card-title">Leadership &amp; Communication</h3>
+      <ul class="techniques-list">
+        <li>Direct mentorship and supervision of 11 undergraduate &amp; Master's researchers</li>
+        <li>Proven track record of first-author publications in high-impact journals</li>
+        <li>Presented to diverse audiences at national symposia and scientific outreach events</li>
+        <li>Interdisciplinary project management across international stakeholders</li>
+        <li>Authoring of institutional and laboratory SOPs &amp; risk assessments</li>
+        <li>Active contribution to academic communities through peer review</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+<section id="publications">
+  <div class="section-label">Publications</div>
+  <div class="pub-list" id="pub-list">
+    <!-- rendered by JS -->
+  </div>
+</section>
+
+
+<section id="contact">
+  <h2>Get in touch</h2>
+  <div class="contact-links">
+
+    <!-- Email: obfuscated via JS, not plain text -->
+    <a href="#" id="contact-email" class="contact-link primary">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      Email
+    </a>
+
+    <!-- Google Scholar -->
+    <a href="https://scholar.google.com/citations?user=FXSLgeMAAAAJ" target="_blank" class="contact-link">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 10a8 8 0 0 1 7.162 3.44L24 9.5z"/></svg>
+      Scholar
+    </a>
+
+    <!-- Bluesky -->
+    <a href="https://bsky.app/gwoodrna" target="_blank" class="contact-link">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 0 1-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.689-.139-1.861-.902-2.204-.659-.299-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8z"/></svg>
+      Bluesky
+    </a>
+
+    <!-- GitHub -->
+    <a href="https://github.com/GeorgeWoodRNA" target="_blank" class="contact-link">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      GitHub
+    </a>
+
+    <!-- ORCID -->
+    <a href="https://orcid.org/0009-0006-3497-6329" target="_blank" class="contact-link">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.016-5.325 5.016h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z"/></svg>
+      ORCID
+    </a>
+
+  </div>
+</section>
+
+<footer>
+  <span>George Wood · Postdoctoral Researcher</span>
+  <span>Bioinformatics · RNA Biology · Host–Microbe Interactions</span>
+</footer>
+
+
+<script>
+// ─────────────────────────────────────────────────────────────────
+// PAPER DEFINITIONS
+// Static data is always shown. OpenAlex is fetched to update
+// citation counts live — if it fails, static data stands.
+// ─────────────────────────────────────────────────────────────────
+const PAPERS = [
+  {
+    doi:         '10.1038/s41467-025-64744-w',
+    preprintDoi: '10.1101/2023.07.21.550113',
+    firstAuthor: true,
+    status:      'published',
+    title:       'The <em>Salmonella</em> pathogenicity island 1 injectisome reprograms host cell translation to evade the inflammatory response',
+    authors:     '<strong>George Wood</strong>, Rebecca Johnson, Jessica Powell, Filip Lastovka, Owain J Bryant, Matthew P. Brember, Panagiotis Tourlomousis, John P Carr, Clare E Bryant, Betty Y-W Chung',
+    journal:     'Nature Communications',
+    year:        2025,
+  },
+  {
+    doi:         '10.1016/j.jmb.2025.169371',
+    preprintDoi: null,
+    firstAuthor: true,
+    status:      'published',
+    title:       'An RNA-Based Dual-Fluorescence Reporter System Reveals Cell Type-Specific and Temporal Dynamics of −1 Programmed Ribosomal Frameshifting',
+    authors:     '<strong>George Wood</strong>, Filip Lastovka, Dominykas Murza, Matthew P. Brember, Naomi McGovern, Betty Y. W. Chung',
+    journal:     'Journal of Molecular Biology',
+    year:        2025,
+  },
+    {
+    doi:         '10.1126/sciimmunol.adq3066',
+    preprintDoi: null,
+    firstAuthor: false,
+    status:      'published',
+    title:       'Interactions between placental Hofbauer cells and <em>L. monocytogenes</em> change throughout gestation',
+    authors:     'Nagisa Yoshida, Anna Appios, Qian Li, Joseph P. Hutton, <strong>George Wood</strong>, Martin Potts, Julia Aleksandrowicz et al.',
+    journal:     'Science Immunology',
+    year:        2025,
+  },
+  {
+    doi:         '10.1016/j.celrep.2025.115263',
+    preprintDoi: '10.1101/2024.04.04.588067',
+    firstAuthor: false,
+    status:      'published',
+    title:       'Spatial proteomics identifies a CRTC-dependent viral signaling pathway that stimulates production of interleukin-11',
+    authors:     'Benjamin J. Ravenhill, Marisa Oliveira, <strong>George Wood</strong>, Ying Di, Colin Davies, Yongxu Lu, Robin Antrobus, Gill Elliott, Nerea Irigoyen, David J. Hughes, Paul Lyons, Betty Chung, Georg Borner, Michael P. Weekes',
+    journal:     'Cell Reports',
+    year:        2025,
+  },
+  {
+    doi:         '10.1371/journal.pone.0336849',
+    preprintDoi: '10.1101/2025.01.31.635863',
+    firstAuthor: false,
+    status:      'published',
+    title:       'Early upregulation of immune suppressors dominates the macrophage response to <em>Toxoplasma gondii</em>',
+    authors:     'Dominykas Murza, Filip Lastovka, <strong>George Wood</strong>, Matthew P. Brember, Ollie Chan, James W. Ajioka, Betty Y. W. Chung',
+    journal:     'PLOS ONE',
+    year:        2025,
+  },
+  {
+    doi:         null,
+    preprintDoi: '10.1101/2024.01.08.574706',
+    firstAuthor: true,
+    status:      'under_review',
+    title:       'Activity of <em>Salmonella</em> SPI-1 inhibits the TLR4-dependent transcriptional but not translational response during macrophage infection',
+    authors:     '<strong>George Wood</strong>, Rebecca Johnson, Filip Lastovka, Matthew P. Brember, Panagiotis Tourlomousis, Clare E Bryant, Betty Y. W. Chung',
+    journal:     'iScience (under review)',
+    year:        2024,
+  },
+  {
+    doi:         '10.1007/s12104-020-09954-7',
+    preprintDoi: null,
+    firstAuthor: false,
+    status:      'published',
+    title:       '<sup>1</sup>H, <sup>15</sup>N and <sup>13</sup>C resonance assignments of the HR1c domain of PRK1, a protein kinase C-related kinase',
+    authors:     'Georgios Sophocleous, <strong>George Wood</strong>, Darerca Owen, Helen R Mott',
+    journal:     'Biomolecular NMR Assignments',
+    year:        2020,
+  },
+];
+
+// ─────────────────────────────────────────────────────────────────
+// OpenAlex helpers — update citation counts if reachable
+// ─────────────────────────────────────────────────────────────────
+const OA = 'https://api.openalex.org/works';
+const MAIL = 'georgedwood@live.co.uk';
+
+async function fetchCitations(doi) {
+  if (!doi) return null;
+  try {
+    const r = await fetch(`${OA}/doi:${doi}?mailto=${MAIL}&select=cited_by_count`, { signal: AbortSignal.timeout(5000) });
+    if (!r.ok) return null;
+    const d = await r.json();
+    return typeof d.cited_by_count === 'number' ? d.cited_by_count : null;
+  } catch { return null; }
+}
+
+// ─────────────────────────────────────────────────────────────────
+// Render
+// ─────────────────────────────────────────────────────────────────
+function renderPapers(papers, citationMap) {
+  const sorted = [...papers].sort((a, b) => {
+    if (b.year !== a.year) return b.year - a.year;
+    return (b.firstAuthor ? 1 : 0) - (a.firstAuthor ? 1 : 0);
+  });
+
+  return sorted.map(p => {
+    const pubCite    = citationMap[p.doi]    ?? null;
+    const preCite    = citationMap[p.preprintDoi] ?? null;
+    const doiUrl     = p.doi        ? `https://doi.org/${p.doi}`        : null;
+    const preprintUrl= p.preprintDoi? `https://doi.org/${p.preprintDoi}`: null;
+
+    // Citation column — counts link to their respective DOIs
+    let metaHtml = '';
+    if (p.status === 'under_review') {
+      if (preCite !== null && preCite > 0) {
+        metaHtml = `<a href="${preprintUrl}" target="_blank" class="pub-cite-pre">${preCite} preprint citation${preCite !== 1 ? 's' : ''}</a>`;
+      }
+    } else {
+      if (pubCite !== null && pubCite > 0) {
+        const link = doiUrl ? `href="${doiUrl}" target="_blank"` : '';
+        metaHtml += `<a ${link} class="pub-cite">${pubCite} citation${pubCite !== 1 ? 's' : ''}</a>`;
+      }
+      if (preCite !== null && preCite > 0) {
+        metaHtml += `<a href="${preprintUrl}" target="_blank" class="pub-cite-pre">${preCite} preprint citation${preCite !== 1 ? 's' : ''}</a>`;
+      }
+    }
+
+    // Tags
+    let tags = '';
+    if (p.firstAuthor) tags += `<span class="pub-tag tag-first">First author</span>`;
+    if (p.status === 'under_review') {
+      tags += `<span class="pub-tag tag-review">Under review</span>`;
+      if (preprintUrl) tags += `<a href="${preprintUrl}" target="_blank" class="pub-tag tag-preprint">Preprint</a>`;
+    }
+
+    const titleHtml = doiUrl
+      ? `<a href="${doiUrl}" target="_blank">${p.title}</a>`
+      : p.title;
+
+    return `
+      <div class="pub-item reveal">
+        <span class="pub-year">${p.year}</span>
+        <div class="pub-content">
+          <div class="pub-title">${titleHtml}</div>
+          <div class="pub-authors">${p.authors}</div>
+          ${p.status !== 'under_review' ? `<div class="pub-journal">${p.journal}</div>` : ''}
+          ${tags ? `<div class="pub-tags">${tags}</div>` : ''}
+        </div>
+        <div class="pub-meta">${metaHtml}</div>
+      </div>`;
+  }).join('');
+}
+
+// ─────────────────────────────────────────────────────────────────
+// Init: render from static data immediately, then refresh citations
+// ─────────────────────────────────────────────────────────────────
+async function init() {
+  const list = document.getElementById('pub-list');
+
+  // Render immediately with static data (no citation counts yet)
+  list.innerHTML = renderPapers(PAPERS, {});
+  observeReveals();
+
+  // Fetch citation counts in background
+  const allDois = PAPERS.flatMap(p => [p.doi, p.preprintDoi].filter(Boolean));
+  const results = await Promise.all(allDois.map(async doi => [doi, await fetchCitations(doi)]));
+  const citationMap = Object.fromEntries(results.filter(([,v]) => v !== null));
+
+  // Re-render with live counts
+  list.innerHTML = renderPapers(PAPERS, citationMap);
+  observeReveals();
+
+  // Update stats
+  const published   = PAPERS.filter(p => p.status === 'published');
+  const firstAuth   = published.filter(p => p.firstAuthor);
+  const totalCites  = published.reduce((s, p) => s + (citationMap[p.doi] || 0), 0);
+
+  // h-index: for each paper sum published + preprint citations, sort desc, find largest h where h papers have >= h
+  const combinedCites = PAPERS.map(p => (citationMap[p.doi] || 0) + (citationMap[p.preprintDoi] || 0))
+                              .sort((a, b) => b - a);
+  const hIndex = combinedCites.reduce((h, c, i) => c >= i + 1 ? i + 1 : h, 0);
+
+  document.getElementById('hero-pub-count').textContent = published.length;
+  document.getElementById('hero-hindex').textContent    = hIndex || '—';
+  const totalCombined = PAPERS.reduce((s, p) => s + (citationMap[p.doi] || 0) + (citationMap[p.preprintDoi] || 0), 0);
+  document.getElementById('hero-citations').textContent = totalCombined > 0 ? totalCombined : '—';
+  document.getElementById('stat-total').textContent     = published.length;
+  document.getElementById('stat-first').textContent     = firstAuth.length;
+  if (totalCites > 0) document.getElementById('stat-citations').textContent = totalCites + '+';
+}
+
+function observeReveals() {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal:not(.observed)').forEach(el => {
+    el.classList.add('observed');
+    io.observe(el);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => { observeReveals(); init(); initNavColour(); initHamburger(); initEmail(); });
+
+function initEmail() {
+  // Obfuscated — assembled at runtime to avoid scraping
+  const parts = ['georgedwood', '@', 'live', '.', 'co.uk'];
+  const addr  = parts.join('');
+  const el    = document.getElementById('contact-email');
+  if (el) el.href = 'mailto:' + addr;
+}
+
+function initHamburger() {
+  const btn  = document.getElementById('hamburger');
+  const menu = document.getElementById('mobile-menu');
+  if (!btn || !menu) return;
+  btn.addEventListener('click', () => {
+    const open = btn.classList.toggle('open');
+    menu.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+}
+
+function closeMenu() {
+  const btn  = document.getElementById('hamburger');
+  const menu = document.getElementById('mobile-menu');
+  if (btn)  btn.classList.remove('open');
+  if (menu) menu.classList.remove('open');
+  document.body.style.overflow = '';
+}
+// ── NAV COLOUR: switches light/dark based on section background ──
+function initNavColour() {
+  // Sections with dark backgrounds → nav should be light (mist)
+  // Sections with light backgrounds → nav should be dark (forest)
+  const darkSections  = ['header', '#research'];
+  const lightSections = ['#career', '#publications', '#contact'];
+
+  const root = document.documentElement;
+
+  const targets = [
+    { el: document.querySelector('header'),               dark: true  },
+    { el: document.querySelector('#techniques'),          dark: true  },
+    { el: document.querySelector('#career'),              dark: false },
+    { el: document.querySelector('#publications'),        dark: false },
+    { el: document.querySelector('#contact'),             dark: false },
+    { el: document.querySelector('footer'),               dark: true  },
+  ].filter(t => t.el);
+
+  // Track which section is most visible at the top of the viewport
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const isDark = targets.find(t => t.el === entry.target)?.dark ?? true;
+        root.style.setProperty('--nav-fg', isDark ? 'var(--mist)' : 'var(--forest)');
+        root.style.setProperty('--nav-bg', isDark ? 'rgba(26,46,38,0.82)' : 'rgba(245,242,238,0.82)');
+      }
+    });
+  }, {
+    rootMargin: '-80px 0px -80% 0px', // fires when section top crosses just below the nav
+    threshold: 0
+  });
+
+  targets.forEach(t => io.observe(t.el));
+}
+
+
+</script>
+</body>
+</html>
