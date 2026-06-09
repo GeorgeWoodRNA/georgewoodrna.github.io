@@ -741,7 +741,7 @@ async function init() {
   document.getElementById('hero-hindex').textContent    = hIndex || '—';
   const totalCombined = PAPERS.reduce((s, p) => s + (citationMap[p.doi] || 0) + (citationMap[p.preprintDoi] || 0), 0);
   document.getElementById('hero-citations').textContent = totalCombined > 0 ? totalCombined : '—';
-  document.getElementById('stat-total').textContent     = published.length;
+ // document.getElementById('stat-total').textContent     = published.length;
   document.getElementById('stat-first').textContent     = firstAuth.length;
   if (totalCites > 0) document.getElementById('stat-citations').textContent = totalCites + '+';
 }
