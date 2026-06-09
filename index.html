@@ -170,7 +170,7 @@
   padding: 4px; 
   background: none; 
   border: none; 
-  z-index: 200; 
+  z-index: 250; 
 }
 .nav-hamburger span { 
   display: block; 
@@ -217,8 +217,12 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s;
+    z-index: 250; 
+    transform: translateY(-100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
   }
-  .nav-mobile-menu.open { opacity: 1; pointer-events: all; }
+  .nav-mobile-menu.open { opacity: 1; pointer-events: all; transform: translateY(0);}
   .nav-mobile-menu a {
     font-family: 'DM Mono', monospace;
     font-size: 1.1rem;
@@ -761,9 +765,13 @@ function initHamburger() {
   const btn  = document.getElementById('hamburger');
   const menu = document.getElementById('mobile-menu');
   if (!btn || !menu) return;
+
   btn.addEventListener('click', () => {
+    // Toggles the state: if it is open, clicking it again removes the 'open' class
     const open = btn.classList.toggle('open');
     menu.classList.toggle('open', open);
+    
+    // Prevents the background page from scrolling behind the menu
     document.body.style.overflow = open ? 'hidden' : '';
   });
 }
