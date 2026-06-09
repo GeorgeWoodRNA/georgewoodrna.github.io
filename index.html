@@ -35,7 +35,7 @@
   .nav-logo { font-family: 'DM Mono', monospace; font-size: 0.90rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--nav-fg, var(--mist)); opacity: 0.65; transition: color 0.4s; }
   .nav-links { display: flex; gap: 2.5rem; list-style: none; }
   .nav-links a { font-family: 'DM Mono', monospace; font-size: 0.90rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--nav-fg, var(--mist)); text-decoration: none; opacity: 0.5; transition: opacity 0.2s, color 0.4s; }
-  .nav-links a:hover { opacity: 1; }
+  .nav-links a:hover { opacity: 1; color: var(--coral) !important;}
   header { min-height: 75vh; display: grid; grid-template-columns: 75% 25%; position: relative; overflow: hidden; }
   .hero-left { background: var(--forest); padding: 5rem; display: flex; flex-direction: column; justify-content: flex-end; position: relative; overflow: hidden; }
   .hero-left::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(231,239,230,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(231,239,230,0.03) 1px, transparent 1px); background-size: 60px 60px; }
@@ -162,11 +162,45 @@
   .reveal-delay-1 { transition-delay: 0.1s; }
   .reveal-delay-2 { transition-delay: 0.2s; }
   /* hamburger button */
-  .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; z-index: 200; }
-  .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--nav-fg, var(--mist)); border-radius: 2px; transition: transform 0.3s, opacity 0.3s, background 0.4s; }
-  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
-  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.nav-hamburger { 
+  display: none; 
+  flex-direction: column; 
+  gap: 5px; 
+  cursor: pointer; 
+  padding: 4px; 
+  background: none; 
+  border: none; 
+  z-index: 200; 
+}
+.nav-hamburger span { 
+  display: block; 
+  width: 22px; 
+  height: 2px; 
+  background: var(--nav-fg, var(--mist)); 
+  border-radius: 2px; 
+  transition: transform 0.3s ease, opacity 0.3s ease, background 0.4s; 
+  transform-origin: center; /* Ensures crisp alignment when rotating */
+}
+
+/* This creates the smooth 'X' out animation when the 'open' class is toggled */
+.nav-hamburger.open span:nth-child(1) { 
+  transform: translateY(7px) rotate(45deg); 
+  background: var(--coral); /* Optional: turns the X coral when open */
+}
+.nav-hamburger.open span:nth-child(2) { 
+  opacity: 0; 
+  transform: translateX(-10px);
+}
+.nav-hamburger.open span:nth-child(3) { 
+  transform: translateY(-7px) rotate(-45deg); 
+  background: var(--coral); /* Optional: turns the X coral when open */
+}
+
+/* Update mobile menu links to hover coral too! */
+.nav-mobile-menu a:hover { 
+  opacity: 1; 
+  color: var(--coral); 
+}
 
   /* mobile dropdown */
   .nav-mobile-menu {
