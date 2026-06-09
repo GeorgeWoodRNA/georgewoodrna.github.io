@@ -631,7 +631,7 @@ const PAPERS = [
     title:       'Activity of <em>Salmonella</em> SPI-1 inhibits the TLR4-dependent transcriptional but not translational response during macrophage infection',
     authors:     '<strong>George Wood</strong>, Rebecca Johnson, Filip Lastovka, Matthew P. Brember, Panagiotis Tourlomousis, Clare E Bryant, Betty Y. W. Chung',
     journal:     '(under review)',
-    year:        2024,
+    year:        'Preprint',
   },
 ];
 
@@ -655,9 +655,12 @@ async function fetchCitations(doi) {
 // Render
 // ─────────────────────────────────────────────────────────────────
 function renderPapers(papers, citationMap) {
-  const sorted = [...papers].sort((a, b) => {
-    if (b.year !== a.year) return b.year - a.year;
-    return (b.firstAuthor ? 1 : 0) - (a.firstAuthor ? 1 : 0);
+  if (b.year !== a.year) {
+    if (a.year === 'Preprint') return 1;  
+    if (b.year === 'Preprint') return -1;
+    return b.year - a.year;
+  }
+  return (b.firstAuthor ? 1 : 0) - (a.firstAuthor ? 1 : 0);
   });
 
   return sorted.map(p => {
