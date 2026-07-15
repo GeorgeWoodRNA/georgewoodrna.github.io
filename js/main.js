@@ -49,9 +49,36 @@
   }
 
   function renderPapers(papers, citationMap) {
+    const statusRank = {
+      in_press: 0,
+      published: 1,
+      accepted: 2,
+      under_review: 3,
+      preprint: 4,
+      thesis: 5
+    };
+
+    const getStatusRank = (paper) => {
+      const status = (paper.status || 'published').toLowerCase();
+      return statusRank[status] ?? 99;
+    };
+
+    const getYearValue = (paper) => {
+      if (typeof paper.year === 'number') return paper.year;
+      if (typeof paper.year === 'string') {
+        const match = paper.year.match(/(\d{4})/);
+        return match ? Number(match[1]) : 0;
+      }
+      return 0;
+    };
+
     const sorted = [...papers].sort((a, b) => {
-      const yearA = typeof a.year === 'number' ? a.year : 0;
-      const yearB = typeof b.year === 'number' ? b.year : 0;
+      const statusA = getStatusRank(a);
+      const statusB = getStatusRank(b);
+      if (statusA !== statusB) return statusA - statusB;
+
+      const yearA = getYearValue(a);
+      const yearB = getYearValue(b);
       if (yearB !== yearA) return yearB - yearA;
       return (b.firstAuthor ? 1 : 0) - (a.firstAuthor ? 1 : 0);
     });
@@ -65,6 +92,7 @@
       const isUnderReview = status === 'under_review';
       const isInPress = status === 'in_press';
       const isAccepted = status === 'accepted';
+      const isThesis = status === 'thesis';
       const isPublished = status === 'published' || isInPress || isAccepted;
 
       let metaHtml = '';
@@ -93,6 +121,9 @@
         }
         if (isAccepted) {
           tags += '<span class="pub-tag tag-accepted">Accepted</span>';
+        }
+        if (isThesis) {
+          tags += '<span class="pub-tag tag-first">Thesis</span>';
         }
         if (preprintUrl && (status === 'published' || isAccepted || isInPress)) {
           tags += `<a href="${preprintUrl}" target="_blank" class="pub-tag tag-preprint">Link to preprint</a>`;
