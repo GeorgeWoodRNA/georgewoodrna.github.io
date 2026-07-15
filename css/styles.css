@@ -116,14 +116,14 @@ section { padding: 4rem 5rem; }
 /* career */
 #career { background: var(--offwhite); }
 .career-grid { display: grid; grid-template-columns: 1fr minmax(auto, 25%); gap: 0 6rem; }
-.career-col-label { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sage); margin-bottom: 2rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(47,74,62,0.12); }
+.career-col-label { font-family: 'DM Mono', monospace; font-size: 0.88rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sage); margin-bottom: 2rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(47,74,62,0.12); }
 .career-item { display: grid; grid-template-columns: 7rem 1fr; gap: 1.5rem; padding: 1.75rem 0; border-bottom: 1px solid rgba(47,74,62,0.07); position: relative; }
 .career-item:last-child { border-bottom: none; }
 .career-item::before { content: ''; position: absolute; left: -5rem; right: -5rem; top: 0; bottom: 0; background: rgba(47,74,62,0.02); opacity: 0; transition: opacity 0.25s; pointer-events: none; }
 .career-item:hover::before { opacity: 1; }
-.career-dates { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; color: var(--sage); padding-top: 0.2rem; line-height: 1.5; }
+.career-dates { font-family: 'DM Mono', monospace; font-size: 0.9rem; letter-spacing: 0.1em; color: var(--sage); padding-top: 0.2rem; line-height: 1.5; }
 .career-role { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 400; color: var(--forest); line-height: 1.25; margin-bottom: 0.3rem; }
-.career-org { font-family: 'DM Mono', monospace; font-size: 0.90rem; letter-spacing: 0.08em; color: var(--sage); margin-bottom: 0.5rem; }
+.career-org { font-family: 'DM Mono', monospace; font-size: 0.93rem; letter-spacing: 0.08em; color: var(--sage); margin-bottom: 0.5rem; }
 .career-desc { font-size: 0.90rem; line-height: 1.75; color: rgba(47,74,62,0.55); }
 .career-tag { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral); border: 1px solid rgba(255,127,110,0.4); padding: 0.1rem 0.4rem; margin-top: 0.5rem; }
 
