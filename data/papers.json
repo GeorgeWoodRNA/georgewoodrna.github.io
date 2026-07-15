@@ -1,0 +1,72 @@
+[
+  {
+    "doi": "10.1038/s41467-025-64744-w",
+    "preprintDoi": "10.1101/2023.07.21.550113",
+    "firstAuthor": true,
+    "status": "published",
+    "title": "The <em>Salmonella</em> pathogenicity island 1 injectisome reprograms host cell translation to evade the inflammatory response",
+    "authors": "<strong>George Wood</strong>, Rebecca Johnson, Jessica Powell, Filip Lastovka, Owain J. Bryant, Matthew P. Brember, Panagiotis Tourlomousis, John P. Carr, Clare E. Bryant, Betty Y. W. Chung",
+    "journal": "Nature Communications",
+    "year": 2025
+  },
+  {
+    "doi": "10.1016/j.jmb.2025.169371",
+    "preprintDoi": null,
+    "firstAuthor": true,
+    "status": "published",
+    "title": "An RNA-Based Dual-Fluorescence Reporter System Reveals Cell Type-Specific and Temporal Dynamics of −1 Programmed Ribosomal Frameshifting",
+    "authors": "<strong>George Wood</strong>, Filip Lastovka, Dominykas Murza, Matthew P. Brember, Naomi McGovern, Betty Y. W. Chung",
+    "journal": "Journal of Molecular Biology",
+    "year": 2025
+  },
+  {
+    "doi": "10.1126/sciimmunol.adq3066",
+    "preprintDoi": null,
+    "firstAuthor": false,
+    "status": "in_press",
+    "title": "Interactions between placental Hofbauer cells and <em>L. monocytogenes</em> change throughout gestation",
+    "authors": "Nagisa Yoshida, Anna Appios, Qian Li, Joseph P. Hutton, <strong>George Wood</strong>, Martin Potts, Julia Aleksandrowicz, Enrico R. Barrozo, Freya Dover, Holly Anderson, Katie Stephens, Irving L. M. H. Aye, Jake R. Thomas, Hannah C. M. Schenk, Adam M. Bourke, Catherine E. Aiken, Ashley Moffett, Andrew Sharkey, Anna V. Protasio, Kjersti M. Aagaard, James R. Edgar, Betty Y. W. Chung, Naomi McGovern",
+    "journal": "Science Immunology",
+    "year": 2025
+  },
+  {
+    "doi": "10.1016/j.celrep.2025.115263",
+    "preprintDoi": "10.1101/2024.04.04.588067",
+    "firstAuthor": false,
+    "status": "published",
+    "title": "Spatial proteomics identifies a CRTC-dependent viral signaling pathway that stimulates production of interleukin-11",
+    "authors": "Benjamin J. Ravenhill, Marisa Oliveira, <strong>George Wood</strong>, Ying Di, Colin Davies, Yongxu Lu, Robin Antrobus, Gill Elliott, Nerea Irigoyen, David J. Hughes, Paul Lyons, Betty Y. W. Chung, Georg Borner, Michael P. Weekes",
+    "journal": "Cell Reports",
+    "year": 2025
+  },
+  {
+    "doi": "10.1371/journal.pone.0336849",
+    "preprintDoi": "10.1101/2025.01.31.635863",
+    "firstAuthor": false,
+    "status": "published",
+    "title": "Early upregulation of immune suppressors dominates the macrophage response to <em>Toxoplasma gondii</em>",
+    "authors": "Dominykas Murza, Filip Lastovka, <strong>George Wood</strong>, Matthew P. Brember, Ollie Chan, James W. Ajioka, Betty Y. W. Chung",
+    "journal": "PLOS ONE",
+    "year": 2025
+  },
+  {
+    "doi": "10.1007/s12104-020-09954-7",
+    "preprintDoi": null,
+    "firstAuthor": false,
+    "status": "published",
+    "title": "<sup>1</sup>H, <sup>15</sup>N and <sup>13</sup>C resonance assignments of the HR1c domain of PRK1, a protein kinase C-related kinase",
+    "authors": "Georgios Sophocleous, <strong>George Wood</strong>, Darerca Owen, Helen R Mott",
+    "journal": "Biomolecular NMR Assignments",
+    "year": 2020
+  },
+  {
+    "doi": null,
+    "preprintDoi": "10.1101/2024.01.08.574706",
+    "firstAuthor": true,
+    "status": "under_review",
+    "title": "Activity of <em>Salmonella</em> SPI-1 inhibits the TLR4-dependent transcriptional but not translational response during macrophage infection",
+    "authors": "<strong>George Wood</strong>, Rebecca Johnson, Filip Lastovka, Matthew P. Brember, Panagiotis Tourlomousis, Clare E Bryant, Betty Y. W. Chung",
+    "journal": "(under review)",
+    "year": "Preprint"
+  }
+]
