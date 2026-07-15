@@ -64,7 +64,8 @@
       const status = paper.status || 'published';
       const isUnderReview = status === 'under_review';
       const isInPress = status === 'in_press';
-      const isPublished = status === 'published' || isInPress;
+      const isAccepted = status === 'accepted';
+      const isPublished = status === 'published' || isInPress || isAccepted;
 
       let metaHtml = '';
       if (isUnderReview) {
@@ -85,9 +86,17 @@
       if (paper.firstAuthor) tags += '<span class="pub-tag tag-first">First author</span>';
       if (isUnderReview) {
         tags += '<span class="pub-tag tag-review">Under review</span>';
-        if (preprintUrl) tags += `<a href="${preprintUrl}" target="_blank" class="pub-tag tag-preprint">Preprint</a>`;
-      } else if (isInPress) {
-        tags += '<span class="pub-tag tag-in-press">In press</span>';
+        if (preprintUrl) tags += `<a href="${preprintUrl}" target="_blank" class="pub-tag tag-preprint">Link to preprint</a>`;
+      } else {
+        if (isInPress) {
+          tags += '<span class="pub-tag tag-in-press">In press</span>';
+        }
+        if (isAccepted) {
+          tags += '<span class="pub-tag tag-accepted">Accepted</span>';
+        }
+        if (preprintUrl && (status === 'published' || isAccepted || isInPress)) {
+          tags += `<a href="${preprintUrl}" target="_blank" class="pub-tag tag-preprint">Link to preprint</a>`;
+        }
       }
 
       const titleHtml = doiUrl ? `<a href="${doiUrl}" target="_blank">${paper.title}</a>` : paper.title;
