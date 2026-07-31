@@ -4,36 +4,42 @@
       "dates": "2023 –<br>2026",
       "role": "Postdoctoral Research Associate",
       "org": "Chung Lab · Dept of Pathology, University of Cambridge",
+      "logo": "images/logos/camuni.png",
       "desc": "Characterised host and viral <em>cis</em>-acting RNA features including programmed ribosomal frameshifting, and developed reporter assays to evaluate therapeutics targeting non-canonical translation. Integrated transcriptomic, translatomic and proteomic datasets to uncover novel gene expression regulation during mammalian and plant infection."
     },
     {
       "dates": "2019 –<br>2023",
       "role": "Departmental PhD Studentship",
       "org": "Chung Lab · Dept of Pathology, University of Cambridge",
+      "logo": "images/logos/camuni.png",
       "desc": "Investigated transcriptional and translational regulation in macrophages infected with <em>Salmonella</em> and <em>Listeria</em>, uncoupling the bacterial contributors to this response. Identified shared and distinct regulatory programmes across two highly divergent intracellular bacterial pathogens."
     },
     {
       "dates": "2019",
       "role": "Research Internship",
       "org": "Diagnostics for the Real World · Little Chesterford, UK",
+      "logo": "images/logos/drw.png",
       "desc": "Supported the development, testing and regulatory compliance of automated point-of-care molecular diagnostics to detect infectious disease in resource-limited settings, reducing assay time by 30%."
     },
     {
       "dates": "2018",
       "role": "MSci Research Project",
       "org": "Mata Lab · Dept of Biochemistry, University of Cambridge",
+      "logo": "images/logos/camuni.png",
       "desc": "Characterised translational regulation of the transcription factor <em>fil1</em> in <em>S. pombe</em> upon activation of the amino acid starvation response."
     },
     {
       "dates": "2016",
       "role": "BA Research Project",
       "org": "Mott & Owen Lab · Dept of Biochemistry, University of Cambridge",
+      "logo": "images/logos/camuni.png",
       "desc": "Purified and biophysically characterised the HR1c domain of human PRK1 and PRK3 to interrogate their structure and role in protein–protein interaction."
     },
     {
       "dates": "2015",
       "role": "Visiting Summer Researcher",
       "org": "Markowetz Lab · Cancer Research UK Cambridge Institute",
+      "logo": "images/logos/crukci.png",
       "desc": "Awarded Bill Willetts and Mays Wild Long Vacation research bursary to conduct a computational project supervised by Dr Andrew Holding. Generated a custom ChIP-Seq data analysis pipeline incorporating novel spike-based normalisation."
     }
   ],
@@ -41,12 +47,14 @@
     {
       "dates": "2019 –<br>2023",
       "role": "PhD, Pathology",
-      "org": "University of Cambridge"
+      "org": "University of Cambridge",
+      "logo": "images/logos/camuni.png"
     },
     {
       "dates": "2013 –<br>2018",
-      "role": "BA (Hons) & MSci Natural Sciences (Biochemistry)",
-      "org": "University of Cambridge"
+      "role": "BA (Hons) & MSci, <br>Natural Sciences ",
+      "org": "University of Cambridge",
+      "logo": "images/logos/camuni.png"
     }
   ]
 }

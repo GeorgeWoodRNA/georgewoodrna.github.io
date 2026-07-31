@@ -4,10 +4,14 @@
     "preprintDoi": "10.1101/2024.01.08.574706",
     "firstAuthor": true,
     "status": "accepted",
-    "title": "Activity of <em>Salmonella</em> SPI-1 inhibits the TLR4-dependent transcriptional but not translational response during macrophage infection",
-    "authors": "<strong>George Wood</strong>, Rebecca Johnson, Filip Lastovka, Matthew P. Brember, Panagiotis Tourlomousis, Clare E. Bryant, Betty Y. W. Chung",
+    "title": "Toll-like Receptor 4-driven translational reprogramming in macrophages is unaffected by <em>Salmonella</em> SPI-1 activity",
+    "authors": "<strong>George Wood*</strong>, Rebecca Johnson*, Filip Lastovka, Matthew P. Brember, Panagiotis Tourlomousis, Clare E. Bryant, Betty Y. W. Chung",
     "journal": "iScience",
-    "year": "Accepted (2026)"
+    "year": "Accepted (2026)",
+    "_tags": ["highlighted"],
+    "summary": "Demonstrates that <em>Salmonella</em> SPI-1 inhibits the transcriptional response to TLR4 activation, but not the translational response.",
+    "abstract": "Changes in gene expression during bacterial infection are the combined result of altered transcription and translation, with the latter comparatively understudied. Gram-negative bacteria rapidly trigger cytokine gene transcription in macrophages through the activation of pathogen associated molecular pattern receptors, for example the detection of <em>Salmonella</em> lipopolysaccharide (LPS) from the bacterial cell envelope by Toll-like receptor 4 (TLR4). Here, through time-resolved parallel translatomic and transcriptomic profiling, we now show temporal TLR4-specific translational upregulation of cell signalling proteins in macrophages induced by <em>Salmonella</em>. While transcriptional upregulation of these genes is dampened through the activity of the <em>Salmonella</em> SPI-1 type three secretion system, a robust translational response remains. These data reveal an important host–pathogen translational regulatory network that modifies the innate immune response of macrophages to infection.",
+    "graphicalAbstract": "images/graphical_abstract/iScience_2026.jpeg"
   },
   {
     "doi": "10.1038/s41467-025-64744-w",
@@ -17,17 +21,25 @@
     "title": "The <em>Salmonella</em> pathogenicity island 1 injectisome reprograms host cell translation to evade the inflammatory response",
     "authors": "<strong>George Wood</strong>, Rebecca Johnson, Jessica Powell, Filip Lastovka, Owain J. Bryant, Matthew P. Brember, Panagiotis Tourlomousis, John P. Carr, Clare E. Bryant, Betty Y. W. Chung",
     "journal": "Nature Communications",
-    "year": 2025
+    "year": 2025,
+    "tags": ["highlighted"],
+    "summary": "Shows how <em>Salmonella</em> hijacks the host cell's translation machinery to dampen the inflammatory response.",
+    "abstract": "During bacterial infection both the host cell and its invader must rapidly divert resources to synthesize specific proteins. For the host, these factors may be needed for innate immune responses, including programmed cell death, and in the bacteria newly synthesized proteins may include survival factors that counteract host defences. <em>Salmonella</em> is an important bacterial pathogen that invades and multiplies within host cells. It is well established that epithelial cell invasion is dependent upon the <em>Salmonella</em> pathogenicity island 1 (SPI-1) type III injectisome, a biological needle that penetrates host cells and injects effectors that promote bacterial internalization. However, the importance of the SPI-1 injectisome in infection of professional phagocytes such as macrophages, the predominant host cell type supporting systemic infection, is less clear. Through time-resolved parallel transcriptomic and translatomic studies of macrophage infection, we reveal SPI-1 injectisome-dependent infection of macrophages triggers rapid translation of transcription factors, including Early Growth Response 1 (EGR1). Despite EGR1’s short half-life, its swift synthesis, driven by untranslated regions of its mRNA, is sufficient to inhibit the transcription of pro-inflammatory genes; this restrains inflammation and macrophage death which would otherwise abort systemic infection. This demonstrates the importance of translational activation in host–pathogen dynamics during bacterial infection.",
+    "graphicalAbstract": "images/graphical_abstract/NatComms_2025.webp"
   },
   {
     "doi": "10.1016/j.jmb.2025.169371",
     "preprintDoi": null,
     "firstAuthor": true,
     "status": "published",
-    "title": "An RNA-Based Dual-Fluorescence Reporter System Reveals Cell Type-Specific and Temporal Dynamics of −1 Programmed Ribosomal Frameshifting",
+    "title": "An RNA-based dual-fluorescence reporter system reveals cell type-specific and temporal dynamics of −1 programmed ribosomal frameshifting",
     "authors": "<strong>George Wood</strong>, Filip Lastovka, Dominykas Murza, Matthew P. Brember, Naomi McGovern, Betty Y. W. Chung",
     "journal": "Journal of Molecular Biology",
-    "year": 2025
+    "year": 2025,
+    "tags": ["highlighted"],
+    "summary": "Introduces an improved dual-fluorescence reporter system to visualise programmed ribosomal frameshifting in real time and per cell.",
+    "abstract": "Translational recoding events, such as programmed ribosomal frameshifting (PRF), are critical regulatory processes that enable the production of multiple proteins from a single mRNA transcript in a finely tuned manner. PRF plays a pivotal role in the gene expression of many viruses, making it an attractive therapeutic target. While the cis-acting elements that drive many recoding events are well-characterised, the impact of the cellular environment on these elements remains poorly understood. To address this gap, we developed an RNA-based dual-fluorescence reporter system that enables real-time monitoring of translational recoding events across a wide range of cell types, including physiologically relevant cell types. This system permits for the quantification of the kinetics of in-trans modulation of frameshift efficiency, providing crucial insights into how cellular context influences recoding events. We validated the system’s ability to accurately monitor the frameshift efficiency of signals from SARS-CoV-2, HIV-1 and the human gene <em>PEG10</em> in live cells, revealing striking differences in frameshift efficiency between cell types, specific to each frameshift cassette. Importantly, this platform offers a robust foundation for large-scale drug screening in physiologically relevant cell types. It not only facilitates the identification of compounds that modulate translational recoding but also enables the assessment of drug entry and activity across different cell types. This dual capability is essential for evaluating the potential efficacy of therapeutic candidates and ensuring that drug effects are accurately measured in biologically meaningful contexts.",
+    "graphicalAbstract": "images/graphical_abstract/JMB_2025.jpg"
   },
   {
     "doi": "10.1126/sciimmunol.adq3066",
@@ -35,9 +47,10 @@
     "firstAuthor": false,
     "status": "published",
     "title": "Interactions between placental Hofbauer cells and <em>L. monocytogenes</em> change throughout gestation",
-    "authors": "Nagisa Yoshida, Anna Appios, Qian Li, Joseph P. Hutton, <strong>George Wood</strong>, Martin Potts, Julia Aleksandrowicz, Enrico R. Barrozo, Freya Dover, Holly Anderson, Katie Stephens, Irving L. M. H. Aye, Jake R. Thomas, Hannah C. M. Schenk, Adam M. Bourke, Catherine E. Aiken, Ashley Moffett, Andrew Sharkey, Anna V. Protasio, Kjersti M. Aagaard, James R. Edgar, Betty Y. W. Chung, Naomi McGovern",
+    "authors": "Nagisa Yoshida*, Anna Appios*, Qian Li, Joseph P. Hutton, <strong>George Wood</strong>, Martin Potts, Julia Aleksandrowicz, Enrico R. Barrozo, Freya Dover, Holly Anderson, Katie Stephens, Irving L. M. H. Aye, Jake R. Thomas, Hannah C. M. Schenk, Adam M. Bourke, Catherine E. Aiken, Ashley Moffett, Andrew Sharkey, Anna V. Protasio, Kjersti M. Aagaard, James R. Edgar, Betty Y. W. Chung, Naomi McGovern",
     "journal": "Science Immunology",
-    "year": 2025
+    "year": 2025,
+    "abstract":"Hofbauer cells (HBCs) are extraembryonic macrophages generated de novo within the human placenta. In this study, we explored how the properties of HBCs change throughout gestation. Our analysis revealed transcriptomic differences between first-trimester and term HBCs, with many of the altered genes linked to immune responses. As pregnancy progresses, HBCs exhibit a marked decrease in phagosome maturation and acidification. We show that the differences between first-trimester and term HBCs are important in the context of infection with <em>Listeria monocytogenes</em>, a pathogen that crosses the placenta and replicates within macrophages. Specifically, we observed reduced colony-forming units and diminished actin recruitment by <em>L. monocytogenes</em> in first-trimester HBCs compared with term HBCs. Our findings indicate that the ability of <em>L. monocytogenes</em> to escape from vacuoles is impaired within first-trimester HBCs. Thus, the changes in HBC biology across pregnancy are important in shaping their interactions with <em>L. monocytogenes</em>."
   },
   {
     "doi": "10.1016/j.celrep.2025.115263",
@@ -45,9 +58,14 @@
     "firstAuthor": false,
     "status": "published",
     "title": "Spatial proteomics identifies a CRTC-dependent viral signaling pathway that stimulates production of interleukin-11",
-    "authors": "Benjamin J. Ravenhill, Marisa Oliveira, <strong>George Wood</strong>, Ying Di, Colin Davies, Yongxu Lu, Robin Antrobus, Gill Elliott, Nerea Irigoyen, David J. Hughes, Paul Lyons, Betty Y. W. Chung, Georg Borner, Michael P. Weekes",
+    "authors": "Benjamin J. Ravenhill*, Marisa Oliveira*, <strong>George Wood</strong>, Ying Di, Colin Davies, Yongxu Lu, Robin Antrobus, Gill Elliott, Nerea Irigoyen, David J. Hughes, Paul Lyons, Betty Y. W. Chung, Georg Borner, Michael P. Weekes",
     "journal": "Cell Reports",
-    "year": 2025
+    "year": 2025,
+    "abstract":"Appropriate cellular recognition of viruses is essential for the generation of an effective innate and adaptive immune response. Viral sensors and their downstream signaling components thus provide a crucial first line of host defense. Many of them exhibit subcellular relocalization upon activation, resulting in the expression of interferon and antiviral genes. To comprehensively identify signaling factors, we analyzed protein relocalization on a global scale during viral infection. cAMP-responsive element-binding protein (CREB)-regulated transcription coactivators 2 and 3 (CRTC2/3) exhibited early cytoplasmic-to-nuclear translocation upon infection with multiple viruses in diverse cell types. This movement was dependent on mitochondrial antiviral signaling protein (MAVS), cyclo-oxygenase proteins, and protein kinase A. A key effect of CRTC2/3 translocation is transcription of the fibro-inflammatory cytokine interleukin (IL)-11. This may be important clinically in viral infections associated with fibrosis, including SARS-CoV-2. Nuclear translocation of CRTC2/3 is, therefore, identified as an important pathway in the context of viral infection.",
+    "graphicalAbstract": "images/graphical_abstract/CellRep_2025.jpg",
+    "tags": ["highlighted"],
+    "summary": "Details a novel regulatory pathway controlling IL-11 production, dependent on CRTC2 and CRTC3 relocalisation to the nucleus during viral infection."
+
   },
   {
     "doi": "10.1371/journal.pone.0336849",
@@ -57,7 +75,8 @@
     "title": "Early upregulation of immune suppressors dominates the macrophage response to <em>Toxoplasma gondii</em>",
     "authors": "Dominykas Murza, Filip Lastovka, <strong>George Wood</strong>, Matthew P. Brember, Ollie Chan, James W. Ajioka, Betty Y. W. Chung",
     "journal": "PLOS ONE",
-    "year": 2025
+    "year": 2025,
+    "abstract": "The apicomplexan parasite <em>Toxoplasma gondii</em> is a master manipulator, subverting its host through secreted proteins, hormone disruption, and even behavioural changes. Macrophages, the immune system’s first responders, play a pivotal role in determining infection outcomes, yet the initial triggers shaping these complex responses remain elusive. This study unveils the earliest transcriptional shifts in a mouse macrophage-like cell line RAW264.7-<em>T. gondii</em> infection model. Using time-resolved transcriptomic profiling, we captured host and parasite gene expression dynamics within the critical 15–120 minute window — when the host mounts its first line of defence and the parasite secures its foothold. By leveraging inactivated parasites, we disentangled responses to active invasion from general immune activation. By 60 minutes, macrophages exhibited a trend of increased suppressor of cytokine signalling expression — uniquely tied to live infection — while stress and pro-growth genes became dysregulated. Meanwhile, <em>T. gondii</em> responded with a slow but strategic transcriptional shift: an early increase in transcription and growth capacity, followed by a delayed activation of secreted proteins. These findings reveal a tug-of-war at the transcriptional level, where macrophages show rapid upregulation, while <em>T. gondii</em> employs a measured, delayed strategy to carve out its replicative niche."
   },
   {
     "doi": "10.1007/s12104-020-09954-7",
@@ -65,9 +84,10 @@
     "firstAuthor": false,
     "status": "published",
     "title": "<sup>1</sup>H, <sup>15</sup>N and <sup>13</sup>C resonance assignments of the HR1c domain of PRK1, a protein kinase C-related kinase",
-    "authors": "Georgios Sophocleous, <strong>George Wood</strong>, Darerca Owen, Helen R Mott",
+    "authors": "Georgios Sophocleous, <strong>George Wood</strong>, Darerca Owen, Helen R. Mott",
     "journal": "Biomolecular NMR Assignments",
-    "year": 2020
+    "year": 2020,
+    "abstract":"PRK1 is a member of the protein kinase C-related kinase (PRK) family of serine/threonine kinases and a downstream effector of Rho GTPases. PRK1 has three N-terminal Homology Region 1 (HR1) domains (HR1a, HR1b and HR1c), which form antiparallel coiled coils that interact with Rho family GTPases. PRK1 also has a C2-like domain that targets it to the plasma membrane and a kinase domain, which is a member of the protein kinase C superfamily. PRK1 is involved in cytoskeletal regulation, cell adhesion, cell cycle progression and the immune response, and is implicated in cancer. There is currently no structural information for the HR1c domain. The <sup>1</sup>H, <sup>15</sup>N and <sup>13</sup>C NMR backbone and sidechain resonance assignment of the HR1c domain presented here forms the basis for this domain’s structural characterisation. This work will also enable studies of interactions between the three HR1 domains in an effort to obtain structural insight into the regulation of PRK1 activity."
   },
 {
     "doi": "10.17863/CAM.108835",
