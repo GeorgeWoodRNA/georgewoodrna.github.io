@@ -180,7 +180,7 @@
       const imageMarkup = paper.graphicalAbstract ? `<div class="highlight-card-image"><img src="${paper.graphicalAbstract}" alt="graphical abstract"></div>` : '';
       const summaryMarkup = paper.summary ? `<div class="highlight-card-summary">${paper.summary}</div>` : '';
       const authorsText = formatHighlightAuthors(paper.authors);
-      const readUrl = paper.preprintDoi ? `https://doi.org/${paper.preprintDoi}` : paper.doi ? `https://doi.org/${paper.doi}` : null;
+      const readUrl = paper.preprintDoi ? `https://doi.org/${paper.doi}` : paper.doi ? `https://doi.org/${paper.doi}` : null;
       const readLink = readUrl ? `<a class="highlight-card-link" href="${readUrl}" target="_blank">Read paper</a>` : '';
 
       return `
