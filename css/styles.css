@@ -52,7 +52,7 @@ h1 em { font-style: italic; color: var(--offwhite); }
 .hero-eyebrow { color: var(--coral); }
 .highlighted-work-frame { overflow: hidden; padding-right: 3rem; position: relative; }
 .highlighted-work-frame::after { content: ''; position: absolute; top: 0; right: 0; width: .75rem; height: 100%; pointer-events: none; background: linear-gradient(to left, rgba(26, 46, 38,1) 0%, rgba(26, 46, 38,0) 100%); }
-.highlighted-work-row { display: flex; gap: 1.5rem; transition: transform 0.45s ease; transform: translateX(0); }
+.highlighted-work-row { display: flex; gap: 1.5rem; transition: transform 0.45s ease; transform: translateX(0); touch-action: pan-y; }
 .highlight-card { flex: 0 0 42.5%; min-width: 42.5%; background: var(--offwhite); border: 1px solid rgba(255,127,110,0.35); border-radius: 20px; padding: 1.75rem; display: flex; flex-direction: column; gap: 1.2rem; box-shadow: 0 12px 32px rgba(15,31,22,0.05); }
 .highlight-card-image { position: relative; width: 100%; overflow: hidden; border-radius: 18px; background: #E7EFE6; }
 .highlight-card-image img, .highlight-card-image svg { width: 100%; display: block; }

@@ -358,23 +358,40 @@
     });
 
     let touchStartX = null;
+    let touchStartY = null;
     let touchCurrentX = null;
+    let touchCurrentY = null;
+    let touchDragging = false;
 
     function handleTouchStart(event) {
       if (event.touches.length !== 1) return;
       touchStartX = event.touches[0].clientX;
+      touchStartY = event.touches[0].clientY;
       touchCurrentX = touchStartX;
+      touchCurrentY = touchStartY;
+      touchDragging = false;
     }
 
     function handleTouchMove(event) {
-      if (touchStartX === null || event.touches.length !== 1) return;
+      if (touchStartX === null || touchStartY === null || event.touches.length !== 1) return;
       touchCurrentX = event.touches[0].clientX;
+      touchCurrentY = event.touches[0].clientY;
+
+      const deltaX = touchCurrentX - touchStartX;
+      const deltaY = touchCurrentY - touchStartY;
+      if (!touchDragging && Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 10) {
+        touchDragging = true;
+        event.preventDefault();
+      }
     }
 
     function handleTouchEnd() {
       if (touchStartX === null || touchCurrentX === null) {
         touchStartX = null;
+        touchStartY = null;
         touchCurrentX = null;
+        touchCurrentY = null;
+        touchDragging = false;
         return;
       }
 
@@ -391,11 +408,14 @@
       }
 
       touchStartX = null;
+      touchStartY = null;
       touchCurrentX = null;
+      touchCurrentY = null;
+      touchDragging = false;
     }
 
     row.addEventListener('touchstart', handleTouchStart, { passive: true });
-    row.addEventListener('touchmove', handleTouchMove, { passive: true });
+    row.addEventListener('touchmove', handleTouchMove, { passive: false });
     row.addEventListener('touchend', handleTouchEnd);
     row.addEventListener('touchcancel', handleTouchEnd);
 

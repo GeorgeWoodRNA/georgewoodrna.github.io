@@ -1,0 +1,107 @@
+# Default: allow all crawling except images
+User-agent: *
+Allow: /
+Disallow: /images/
+Disallow: /*.webp$
+Disallow: /*.png$
+Disallow: /*.jpg$
+Disallow: /*.jpeg$
+Disallow: /*.gif$
+Disallow: /*.svg$
+
+# Google
+User-agent: Googlebot
+Allow: /
+Disallow: /images/
+Disallow: /*.webp$
+Disallow: /*.png$
+Disallow: /*.jpg$
+Disallow: /*.jpeg$
+Disallow: /*.gif$
+Disallow: /*.svg$
+
+User-agent: Googlebot-Image
+Disallow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Disallow: /images/
+Disallow: /*.webp$
+Disallow: /*.png$
+Disallow: /*.jpg$
+Disallow: /*.jpeg$
+Disallow: /*.gif$
+Disallow: /*.svg$
+
+# DuckDuckGo
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /images/
+Disallow: /*.webp$
+Disallow: /*.png$
+Disallow: /*.jpg$
+Disallow: /*.jpeg$
+Disallow: /*.gif$
+Disallow: /*.svg$
+
+# Yahoo
+User-agent: Slurp
+Allow: /
+Disallow: /images/
+Disallow: /*.webp$
+Disallow: /*.png$
+Disallow: /*.jpg$
+Disallow: /*.jpeg$
+Disallow: /*.gif$
+Disallow: /*.svg$
+
+# Yandex
+User-agent: YandexBot
+Allow: /
+Disallow: /images/
+Disallow: /*.webp$
+Disallow: /*.png$
+Disallow: /*.jpg$
+Disallow: /*.jpeg$
+Disallow: /*.gif$
+Disallow: /*.svg$
+
+# Baidu
+User-agent: Baiduspider
+Allow: /
+Disallow: /images/
+Disallow: /*.webp$
+Disallow: /*.png$
+Disallow: /*.jpg$
+Disallow: /*.jpeg$
+Disallow: /*.gif$
+Disallow: /*.svg$
+
+# Apple (Siri/Spotlight)
+User-agent: Applebot
+Allow: /
+Disallow: /images/
+Disallow: /*.webp$
+Disallow: /*.png$
+Disallow: /*.jpg$
+Disallow: /*.jpeg$
+Disallow: /*.gif$
+Disallow: /*.svg$
+
+# Link-preview / unfurl bots (Slack, LinkedIn, X, Facebook) —
+# these read your og:image meta tag for previews regardless of this
+# disallow, since that's a separate mechanism from crawling/indexing
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Slackbot
+Allow: /
+
+Sitemap: https://georgewoodrna.github.io/sitemap.xml
