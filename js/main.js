@@ -265,6 +265,10 @@
       loop: true,
       slidesPerView: 'auto',
       spaceBetween: 24,
+      mousewheel: {
+        forceToAxis: true,
+        sensitivity: 10,
+        },
       grabCursor: true,
       snapToSlideEdge: true,
         navigation: {
@@ -274,15 +278,12 @@
       ally: true,
       breakpoints: {
         0: {
-          slidesPerView: 1.05,
-          spaceBetween: 16
+          spaceBetween: 15
         },
         768: {
-          slidesPerView: 1.3,
           spaceBetween: 20
         },
         900: {
-          slidesPerView: 'auto',
           spaceBetween: 24
         }
       }
