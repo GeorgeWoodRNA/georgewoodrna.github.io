@@ -264,7 +264,7 @@
     new Swiper('.highlighted-work-frame', {
       loop: true,
       slidesPerView: 'auto',
-      spaceBetween: 24,
+      spaceBetween: 20,
       mousewheel: {
         forceToAxis: true,
         sensitivity: 10,
@@ -278,13 +278,13 @@
       ally: true,
       breakpoints: {
         0: {
-          spaceBetween: 15
+          spaceBetween: 10
         },
         768: {
-          spaceBetween: 20
+          spaceBetween: 15
         },
         900: {
-          spaceBetween: 24
+          spaceBetween: 20
         }
       }
     });

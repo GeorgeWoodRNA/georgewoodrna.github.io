@@ -9,7 +9,7 @@
   --swiper-navigation-sides-offset: 1rem;
   --swiper-navigation-size: 25px;
 }
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; padding-top: calc(env(safe-area-inset-top) + 0px)}
 html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
 body { background: var(--ink); color: var(--forest); font-family: 'General Sans', sans-serif; font-weight: 300; overflow-x: hidden; font-size: 16px; max-width: 100%; padding-top: calc(env(safe-area-inset-top) + 0px)}
 nav { width: 100%; max-width: 100%; }
