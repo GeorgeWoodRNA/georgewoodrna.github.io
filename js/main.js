@@ -414,10 +414,11 @@
       touchDragging = false;
     }
 
-    row.addEventListener('touchstart', handleTouchStart, { passive: true });
-    row.addEventListener('touchmove', handleTouchMove, { passive: false });
-    row.addEventListener('touchend', handleTouchEnd);
-    row.addEventListener('touchcancel', handleTouchEnd);
+    const touchTarget = frame || row;
+    touchTarget.addEventListener('touchstart', handleTouchStart, { passive: false });
+    touchTarget.addEventListener('touchmove', handleTouchMove, { passive: false });
+    touchTarget.addEventListener('touchend', handleTouchEnd);
+    touchTarget.addEventListener('touchcancel', handleTouchEnd);
 
     prevButton.addEventListener('click', () => moveSlides(-1));
     nextButton.addEventListener('click', () => {
