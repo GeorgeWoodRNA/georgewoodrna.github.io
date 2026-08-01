@@ -219,7 +219,7 @@ footer span { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spac
   header { grid-template-columns: 1fr; min-height: auto; }
   .hero-right { min-height: auto; padding: 2rem; }
   nav {
-    padding: calc(1.2rem + env(safe-area-inset-top)) calc(1.25rem + env(safe-area-inset-right)) 1.2rem calc(1.25rem + env(safe-area-inset-left));
+    padding: calc(1.2rem + env(safe-area-inset-top, 0px)) calc(1.25rem + env(safe-area-inset-right, 0px)) 1.2rem calc(1.25rem + env(safe-area-inset-left, 0px));
     width: 100%;
     max-width: 100%;
     left: 0;
