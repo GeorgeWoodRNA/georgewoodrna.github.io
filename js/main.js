@@ -381,9 +381,9 @@ function handleTouchMove(event) {
   const deltaY = touchCurrentY - touchStartY;
 
   if (!touchDragging) {
-    if (Math.abs(deltaX) > 24 && Math.abs(deltaX) > Math.abs(deltaY) * 2) {
+    if (Math.abs(deltaX) > 10 && Math.abs(deltaX) > Math.abs(deltaY)) {
       touchDragging = true;
-    } else if (Math.abs(deltaY) > 10) {
+    } else if (Math.abs(deltaY) > 10 && Math.abs(deltaY) > Math.abs(deltaX)) {
       // it's a vertical scroll — stop checking, let the browser handle it
       touchStartX = null;
       touchStartY = null;
