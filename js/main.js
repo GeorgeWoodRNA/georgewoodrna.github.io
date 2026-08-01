@@ -279,7 +279,6 @@
       breakpoints: {
         0: {
           spaceBetween: 10,
-          centeredSlides: true
         },
         768: {
           spaceBetween: 15
