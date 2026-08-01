@@ -64,6 +64,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 <link rel="stylesheet" href="css/styles.css">
 <script async src="https://badge.dimensions.ai/badge.js"></script>
 </head>
@@ -136,11 +137,11 @@
   <div class="hero-right">
     <div class="highlighted-work">
       <div class="section-label hero-eyebrow">HIGHLIGHTED WORK</div>
-      <div class="highlighted-work-frame">
-        <div class="highlighted-work-row"></div>
+      <div class="highlighted-work-frame slide-container swiper">
+        <div class="highlighted-work-row slide-content swiper-wrapper"></div>
       </div>
-      <button class="highlight-slide-button highlight-slide-button-prev" type="button" aria-label="Previous highlighted work"><</button>
-      <button class="highlight-slide-button highlight-slide-button-next" type="button" aria-label="Next highlighted work">></button>
+      <button class="highlight-slide-button highlight-slide-button-prev swiper-button-prev" type="button" aria-label="Previous highlighted work"></button>
+      <button class="highlight-slide-button highlight-slide-button-next swiper-button-next" type="button" aria-label="Next highlighted work"></button>
     </div>
   </div>
 </header>
@@ -193,6 +194,7 @@
 </section>
 
 
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

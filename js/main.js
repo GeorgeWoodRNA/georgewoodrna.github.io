@@ -184,7 +184,7 @@
       const readLink = readUrl ? `<a class="highlight-card-link" href="${readUrl}" target="_blank">Read paper</a>` : '';
 
       return `
-        <article class="highlight-card reveal">
+        <article class="highlight-card reveal swiper-slide">
           ${imageMarkup}
           <div class="highlight-card-title">${titleHtml}</div>
           <div class="highlight-card-authors">${authorsText} — <em>${paper.journal}</em>, ${paper.year}</div>
@@ -247,199 +247,46 @@
   }
 
   function initHighlightedCarousel() {
-    const row = document.querySelector('.highlighted-work-row');
-    const frame = document.querySelector('.highlighted-work-frame');
+    if (typeof Swiper === 'undefined') return;
+
+    const highlighted = document.querySelectorAll('.highlight-card');
     const prevButton = document.querySelector('.highlight-slide-button-prev');
     const nextButton = document.querySelector('.highlight-slide-button-next');
-    if (!row || !frame || !prevButton || !nextButton) return;
+    const empty = highlighted.length === 0;
 
-    const originalCards = Array.from(row.querySelectorAll('.highlight-card'));
-    if (!originalCards.length) return;
-
-    const originalHtml = originalCards.map((card) => card.outerHTML);
-    let cards = [];
-    let visibleCount = 0;
-    let slideWidth = 0;
-    let gap = 0;
-    let index = 0;
-    let isTransitioning = false;
-    let hasMovedRight = false;
-
-    function getVisibleCount() {
-      if (!slideWidth) return 1;
-      const frameWidth = frame.getBoundingClientRect().width;
-      return Math.max(1, Math.floor(frameWidth / (slideWidth + gap)));
+    if (prevButton && nextButton) {
+      prevButton.style.visibility = empty ? 'hidden' : 'visible';
+      nextButton.style.visibility = empty ? 'hidden' : 'visible';
+      prevButton.disabled = empty;
+      nextButton.disabled = empty;
     }
 
-    function getOffset(slot) {
-      return slot * (slideWidth + gap);
-    }
-
-    function buildCarousel() {
-      row.innerHTML = '';
-      const prefix = originalHtml.slice(-visibleCount);
-      const suffix = originalHtml.slice(0, visibleCount);
-      prefix.forEach((html) => row.insertAdjacentHTML('beforeend', html));
-      originalHtml.forEach((html) => row.insertAdjacentHTML('beforeend', html));
-      suffix.forEach((html) => row.insertAdjacentHTML('beforeend', html));
-      cards = Array.from(row.querySelectorAll('.highlight-card'));
-      index = visibleCount;
-      setPosition(index, false);
-    }
-
-    function setPosition(slot, animate = true) {
-      row.style.transition = animate ? 'transform 0.45s ease' : 'none';
-      row.style.transform = `translateX(-${getOffset(slot)}px)`;
-      if (!animate) {
-        row.getBoundingClientRect();
-        row.style.transition = 'transform 0.45s ease';
-      }
-    }
-
-    function updateArrowVisibility() {
-      const allVisible = originalHtml.length <= visibleCount;
-      nextButton.disabled = allVisible;
-      nextButton.style.opacity = allVisible ? '0' : '1';
-      nextButton.style.visibility = allVisible ? 'hidden' : 'visible';
-
-      if (allVisible) {
-        prevButton.disabled = true;
-        prevButton.style.opacity = '0';
-        prevButton.style.visibility = 'hidden';
-      } else if (hasMovedRight) {
-        prevButton.disabled = false;
-        prevButton.style.opacity = '1';
-        prevButton.style.visibility = 'visible';
-      } else {
-        prevButton.disabled = true;
-        prevButton.style.opacity = '0';
-        prevButton.style.visibility = 'hidden';
-      }
-    }
-
-    function refreshSizes() {
-      const sampleCard = originalCards[0];
-      if (!sampleCard) return;
-      slideWidth = sampleCard.getBoundingClientRect().width;
-      gap = parseFloat(getComputedStyle(row).gap) || 0;
-      const newVisibleCount = getVisibleCount();
-      if (newVisibleCount !== visibleCount) {
-        visibleCount = newVisibleCount;
-        buildCarousel();
-      } else {
-        setPosition(index, false);
-      }
-      updateArrowVisibility();
-    }
-
-    function jumpToSlot(slot) {
-      index = slot;
-      setPosition(index, false);
-    }
-
-    function moveSlides(delta) {
-      if (isTransitioning) return;
-      if (originalHtml.length <= visibleCount) return;
-      isTransitioning = true;
-      index += delta;
-      setPosition(index);
-    }
-
-    row.addEventListener('transitionend', () => {
-      if (!isTransitioning) return;
-      isTransitioning = false;
-      const total = originalHtml.length;
-      if (index >= total + visibleCount) {
-        jumpToSlot(visibleCount);
-      } else if (index < visibleCount) {
-        jumpToSlot(total + index);
-      }
-      updateArrowVisibility();
-    });
-
-    let touchStartX = null;
-    let touchStartY = null;
-    let touchCurrentX = null;
-    let touchCurrentY = null;
-    let touchDragging = false;
-
-    function handleTouchStart(event) {
-      if (event.touches.length !== 1) return;
-      touchStartX = event.touches[0].clientX;
-      touchStartY = event.touches[0].clientY;
-      touchCurrentX = touchStartX;
-      touchCurrentY = touchStartY;
-      touchDragging = false;
-    }
-
-function handleTouchMove(event) {
-  if (touchStartX === null || touchStartY === null || event.touches.length !== 1) return;
-  touchCurrentX = event.touches[0].clientX;
-  touchCurrentY = event.touches[0].clientY;
-
-  const deltaX = touchCurrentX - touchStartX;
-  const deltaY = touchCurrentY - touchStartY;
-
-  if (!touchDragging) {
-    if (Math.abs(deltaX) > 10 && Math.abs(deltaX) > Math.abs(deltaY)) {
-      touchDragging = true;
-    } else if (Math.abs(deltaY) > 10 && Math.abs(deltaY) > Math.abs(deltaX)) {
-      // it's a vertical scroll — stop checking, let the browser handle it
-      touchStartX = null;
-      touchStartY = null;
-      return;
-    }
-  }
-
-  if (touchDragging) {
-    event.preventDefault();
-  }
-}
-
-    function handleTouchEnd() {
-      if (touchStartX === null || touchCurrentX === null) {
-        touchStartX = null;
-        touchStartY = null;
-        touchCurrentX = null;
-        touchCurrentY = null;
-        touchDragging = false;
-        return;
-      }
-
-      const deltaX = touchStartX - touchCurrentX;
-      const threshold = 50;
-      if (Math.abs(deltaX) > threshold) {
-        if (deltaX > 0) {
-          hasMovedRight = true;
-          moveSlides(1);
-        } else {
-          moveSlides(-1);
+    new Swiper('.highlighted-work-frame', {
+      loop: true,
+      slidesPerView: 'auto',
+      spaceBetween: 24,
+      grabCursor: true,
+      snapToSlideEdge: true,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      ally: true,
+      breakpoints: {
+        0: {
+          slidesPerView: 1.05,
+          spaceBetween: 16
+        },
+        768: {
+          slidesPerView: 1.3,
+          spaceBetween: 20
+        },
+        900: {
+          slidesPerView: 'auto',
+          spaceBetween: 24
         }
-        updateArrowVisibility();
       }
-
-      touchStartX = null;
-      touchStartY = null;
-      touchCurrentX = null;
-      touchCurrentY = null;
-      touchDragging = false;
-    }
-
-    const touchTarget = frame || row;
-    touchTarget.addEventListener('touchstart', handleTouchStart, { passive: false });
-    touchTarget.addEventListener('touchmove', handleTouchMove, { passive: false });
-    touchTarget.addEventListener('touchend', handleTouchEnd);
-    touchTarget.addEventListener('touchcancel', handleTouchEnd);
-
-    prevButton.addEventListener('click', () => moveSlides(-1));
-    nextButton.addEventListener('click', () => {
-      hasMovedRight = true;
-      moveSlides(1);
-      updateArrowVisibility();
     });
-
-    refreshSizes();
-    window.addEventListener('resize', refreshSizes);
   }
 
   function initHamburger() {

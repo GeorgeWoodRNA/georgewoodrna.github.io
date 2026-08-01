@@ -6,6 +6,8 @@
   --forest:   #0F1F16;
   --ink:      #1a2e26;
   --nav-bg:   rgba(26,46,38,0.55);
+  --swiper-navigation-sides-offset: 1rem;
+  --swiper-navigation-size: 25px;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
@@ -47,8 +49,9 @@ h1 em { font-style: italic; color: var(--offwhite); }
 .hero-eyebrow { color: var(--coral); }
 .highlighted-work-frame { overflow: hidden; padding-right: 3rem; position: relative; touch-action: pan-y; }
 .highlighted-work-frame::after { content: ''; position: absolute; top: 0; right: 0; width: .75rem; height: 100%; pointer-events: none; background: linear-gradient(to left, rgba(26, 46, 38,1) 0%, rgba(26, 46, 38,0) 100%); }
-.highlighted-work-row { display: flex; gap: 1.5rem; transition: transform 0.45s ease; transform: translateX(0); touch-action: pan-y; }
-.highlight-card { flex: 0 0 42.5%; min-width: 42.5%; background: var(--offwhite); border: 1px solid rgba(255,127,110,0.35); border-radius: 20px; padding: 1.75rem; display: flex; flex-direction: column; gap: 1.2rem; box-shadow: 0 12px 32px rgba(15,31,22,0.05); touch-action: pan-y; }
+.highlighted-work-row { display: flex; gap: 1.5rem; transition: transform 0.45s ease; touch-action: pan-y; align-items: stretch; }
+.highlighted-work-row .swiper-slide { display: flex; align-items: stretch; }
+.highlight-card { flex: 1 0 42.5%; min-width: 42.5%; background: var(--offwhite); border: 1px solid rgba(255,127,110,0.35); border-radius: 20px; padding: 1.75rem; display: flex; flex-direction: column; gap: 1.2rem; box-shadow: 0 12px 32px rgba(15,31,22,0.05); height: auto; }
 .highlight-card-image { position: relative; width: 100%; overflow: hidden; border-radius: 18px; background: #E7EFE6; }
 .highlight-card-image img, .highlight-card-image svg { width: 100%; display: block; }
 .highlight-card-image img { height: auto; object-fit: contain; }
@@ -57,11 +60,11 @@ h1 em { font-style: italic; color: var(--offwhite); }
 .highlight-card-authors strong { color: var(--forest); }
 .highlight-card-summary { font-size: 0.95rem; line-height: 1.65; color: rgba(15,31,22,0.82); }
 .highlight-card-link { align-self: flex-start; font-family: 'DM Mono', monospace; font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--coral); text-decoration: none; padding-top: 0.25rem; }
-.highlight-slide-button { position: absolute; top: 50%; transform: translateY(-50%); width: 46px; height: 46px; border: 1px solid rgba(255,127,110,0.35); background: rgba(255,255,255,0.95); color: var(--coral); border-radius: 50%; font-size: 1.25rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: background 0.25s, transform 0.25s, border-color 0.25s, opacity 0.25s, visibility 0.25s; }
+.highlight-slide-button { position: absolute; top: 50%; transform: translateY(-50%); width: 46px; height: 46px; border: 1px solid rgba(255,127,110,0.35); background: rgba(255,255,255,0.95); color: var(--coral); border-radius: 50%; font-size: 1rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: background 0.25s, transform 0.25s, border-color 0.25s, opacity 0.25s, visibility 0.25s; z-index: 10; }
 .highlight-slide-button:hover { transform: translateY(-50%) scale(1.05); border-color: rgba(255,127,110,0.55); }
 .highlight-slide-button:disabled { opacity: 0.35; cursor: default; transform: translateY(-50%); }
-.highlight-slide-button-next { right: -41px; }
-.highlight-slide-button-prev { left: -41px; right: auto; opacity: 0; visibility: hidden; }
+.highlight-slide-button-next { right: -2rem; }
+.highlight-slide-button-prev { left: -2rem; right: auto; opacity: 1; visibility: visible; }
 .highlight-card-text-only .highlight-card-image { display: none; }
 section { padding: 4rem 5rem; }
 .section-label { font-family: 'DM Mono', monospace; font-size: 0.88rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--coral); margin-bottom: 3rem; display: flex; align-items: center; gap: 1rem; }
