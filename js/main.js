@@ -372,18 +372,29 @@
       touchDragging = false;
     }
 
-    function handleTouchMove(event) {
-      if (touchStartX === null || touchStartY === null || event.touches.length !== 1) return;
-      touchCurrentX = event.touches[0].clientX;
-      touchCurrentY = event.touches[0].clientY;
+function handleTouchMove(event) {
+  if (touchStartX === null || touchStartY === null || event.touches.length !== 1) return;
+  touchCurrentX = event.touches[0].clientX;
+  touchCurrentY = event.touches[0].clientY;
 
-      const deltaX = touchCurrentX - touchStartX;
-      const deltaY = touchCurrentY - touchStartY;
-      if (!touchDragging && Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 10) {
-        touchDragging = true;
-        event.preventDefault();
-      }
+  const deltaX = touchCurrentX - touchStartX;
+  const deltaY = touchCurrentY - touchStartY;
+
+  if (!touchDragging) {
+    if (Math.abs(deltaX) > 24 && Math.abs(deltaX) > Math.abs(deltaY) * 2) {
+      touchDragging = true;
+    } else if (Math.abs(deltaY) > 10) {
+      // it's a vertical scroll — stop checking, let the browser handle it
+      touchStartX = null;
+      touchStartY = null;
+      return;
     }
+  }
+
+  if (touchDragging) {
+    event.preventDefault();
+  }
+}
 
     function handleTouchEnd() {
       if (touchStartX === null || touchCurrentX === null) {
