@@ -266,6 +266,7 @@ h1 em {
   flex-direction: column;
   gap: 1.2rem;
   box-shadow: 0 12px 32px rgba(15,31,22,0.05);
+  height: auto;
 }
 
 .highlight-card-image {
