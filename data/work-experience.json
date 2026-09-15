@@ -1,36 +1,43 @@
 {
   "experience": [
     {
+      "dates": "2026 –<br>Present",
+      "role": "Bioinformatician",
+      "org": "Crossley Lab · Cancer Research UK Cambridge Institute",
+      "logo": "images/logos/crukci.png",
+      "desc": "Employing computational analysis to investigate the biology, immunogenicity, and cellular consequences of RNA:DNA hybrids. Establishing scalable bioinformatic workflows for novel sequencing technologies and collaborating closely with experimental scientists to translate complex multi-omics data into actionable biological discoveries."
+    },
+        {
       "dates": "2023 –<br>2026",
       "role": "Postdoctoral Research Associate",
       "org": "Chung Lab · Dept of Pathology, University of Cambridge",
       "logo": "images/logos/camuni.png",
-      "desc": "Characterised host and viral <em>cis</em>-acting RNA features including programmed ribosomal frameshifting, and developed reporter assays to evaluate therapeutics targeting non-canonical translation. Integrated transcriptomic, translatomic and proteomic datasets to uncover novel gene expression regulation during mammalian and plant infection."
+      "desc": "Characterised host and viral <em>cis</em>-acting RNA features including those conferring programmed ribosomal frameshifting, and developed reporter assays to evaluate therapeutics targeting non-canonical translation. Integrated transcriptomic, translatomic and proteomic datasets to uncover novel gene expression regulation during mammalian and plant infection."
     },
     {
       "dates": "2019 –<br>2023",
-      "role": "Departmental PhD Studentship",
+      "role": "PhD Student",
       "org": "Chung Lab · Dept of Pathology, University of Cambridge",
       "logo": "images/logos/camuni.png",
       "desc": "Investigated transcriptional and translational regulation in macrophages infected with <em>Salmonella</em> and <em>Listeria</em>, uncoupling the bacterial contributors to this response. Identified shared and distinct regulatory programmes across two highly divergent intracellular bacterial pathogens."
     },
     {
       "dates": "2019",
-      "role": "Research Internship",
+      "role": "Research Intern",
       "org": "Diagnostics for the Real World · Little Chesterford, UK",
       "logo": "images/logos/drw.png",
-      "desc": "Supported the development, testing and regulatory compliance of automated point-of-care molecular diagnostics to detect infectious disease in resource-limited settings, reducing assay time by 30%."
+      "desc": "Supported the development, testing and regulatory compliance of automated point-of-care molecular diagnostics to detect infectious disease in resource-limited settings."
     },
     {
       "dates": "2018",
-      "role": "MSci Research Project",
+      "role": "MSci Researcher",
       "org": "Mata Lab · Dept of Biochemistry, University of Cambridge",
       "logo": "images/logos/camuni.png",
       "desc": "Characterised translational regulation of the transcription factor <em>fil1</em> in <em>S. pombe</em> upon activation of the amino acid starvation response."
     },
     {
       "dates": "2016",
-      "role": "BA Research Project",
+      "role": "BA Researcher",
       "org": "Mott & Owen Lab · Dept of Biochemistry, University of Cambridge",
       "logo": "images/logos/camuni.png",
       "desc": "Purified and biophysically characterised the HR1c domain of human PRK1 and PRK3 to interrogate their structure and role in protein–protein interaction."
