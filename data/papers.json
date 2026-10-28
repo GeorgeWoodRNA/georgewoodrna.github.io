@@ -63,7 +63,7 @@
     "year": 2025,
     "abstract":"Appropriate cellular recognition of viruses is essential for the generation of an effective innate and adaptive immune response. Viral sensors and their downstream signaling components thus provide a crucial first line of host defense. Many of them exhibit subcellular relocalization upon activation, resulting in the expression of interferon and antiviral genes. To comprehensively identify signaling factors, we analyzed protein relocalization on a global scale during viral infection. cAMP-responsive element-binding protein (CREB)-regulated transcription coactivators 2 and 3 (CRTC2/3) exhibited early cytoplasmic-to-nuclear translocation upon infection with multiple viruses in diverse cell types. This movement was dependent on mitochondrial antiviral signaling protein (MAVS), cyclo-oxygenase proteins, and protein kinase A. A key effect of CRTC2/3 translocation is transcription of the fibro-inflammatory cytokine interleukin (IL)-11. This may be important clinically in viral infections associated with fibrosis, including SARS-CoV-2. Nuclear translocation of CRTC2/3 is, therefore, identified as an important pathway in the context of viral infection.",
     "graphicalAbstract": "images/graphical_abstract/CellRep_2025.jpg",
-    "tags": ["highlighted"],
+    "_tags": ["highlighted"],
     "summary": "Details a novel regulatory pathway controlling IL-11 production, dependent on CRTC2 and CRTC3 relocalisation to the nucleus during viral infection."
 
   },
