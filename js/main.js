@@ -139,8 +139,8 @@
             <div class="pub-title">${titleHtml}</div>
             <div class="pub-authors">${paper.authors}</div>
             ${!isUnderReview ? `<div class="pub-journal">${paper.journal}</div>` : ''}
-            ${abstractMarkup}
             ${tags ? `<div class="pub-tags">${tags}</div>` : ''}
+            ${abstractMarkup}
           </div>
           <div class="pub-meta">${metaHtml}</div>
         </div>`;
