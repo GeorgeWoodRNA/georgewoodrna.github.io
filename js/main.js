@@ -119,14 +119,15 @@
         }
       }
 
-      const abstractId = `abstract-${index}`;
-      if (paper.abstract) {
-        tags += `<button class="pub-tag tag-abstract" type="button" aria-expanded="false" aria-controls="${abstractId}">Abstract</button>`;
-      }
-
       // Mobile: compact "Citations | n" pill sits with the tags; CSS shows it or the round badge
       if (paper.doi) {
         tags += `<span class="pub-badge pub-badge-compact"><span class="__dimensions_badge_embed__" data-doi="${paper.doi}" data-hide-zero-citations="true" data-style="small_rectangle" data-legend="never"></span></span>`;
+      }
+
+      // last in the row, directly above the abstract it opens
+      const abstractId = `abstract-${index}`;
+      if (paper.abstract) {
+        tags += `<button class="pub-tag tag-abstract" type="button" aria-expanded="false" aria-controls="${abstractId}">Abstract</button>`;
       }
 
       const titleHtml = doiUrl ? `<a href="${doiUrl}" target="_blank">${paper.title}</a>` : paper.title;

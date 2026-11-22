@@ -943,6 +943,11 @@ nav button:focus-visible {
     height: var(--pill-h);
   }
 
+  /* no badge (zero citations, or not loaded yet): don't leave an empty slot in the row */
+  .pub-badge-compact:not(:has(.__dimensions_Badge)) {
+    display: none;
+  }
+
   .pub-badge-compact .__dimensions_badge_embed__,
   .pub-badge-compact .__dimensions_Link {
     display: block;
