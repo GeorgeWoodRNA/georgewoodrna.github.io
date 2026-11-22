@@ -7,8 +7,8 @@
 
   function logoForItem(item) {
     const org = (item.org || '').toLowerCase();
-    if (org.includes('diagnostics for the real world')) return 'images/logos/drw.jpg';
-    if (org.includes('cancer research uk') || org.includes('cruk')) return 'images/logos/crukci.jpg';
+    if (org.includes('diagnostics for the real world')) return 'images/logos/drw.png';
+    if (org.includes('cancer research uk') || org.includes('cruk')) return 'images/logos/crukci.png';
     if (org.includes('university of cambridge')) return 'images/logos/camuni.png';
     return null;
   }
@@ -19,7 +19,7 @@
     const logoSrc = item.logo || logoForItem(item);
     const logoMarkup = logoSrc ? `<img class="career-logo" src="${logoSrc}" alt="${item.org} logo">` : '';
     return `
-      <div class="career-item reveal">
+      <div class="career-item">
         <span class="career-dates">${item.dates}</span>
         <div class="career-entry">
           ${logoMarkup}
@@ -93,7 +93,7 @@
 
       let metaHtml = '';
       if (paper.doi) {
-        metaHtml += `<span class="__dimensions_badge_embed__" data-doi="${paper.doi}" data-hide-zero-citations="true" data-style="small_circle"></span>`;
+        metaHtml += `<span class="pub-badge pub-badge-wide"><span class="__dimensions_badge_embed__" data-doi="${paper.doi}" data-hide-zero-citations="true" data-style="small_circle"></span></span>`;
       }
       if (isUnderReview && preprintUrl) {
         metaHtml += `<a href="${preprintUrl}" target="_blank" class="pub-cite-pre">Preprint</a>`;
@@ -119,11 +119,16 @@
         }
       }
 
+      // Mobile: compact "Citations | n" pill sits with the tags; CSS shows it or the round badge
+      if (paper.doi) {
+        tags += `<span class="pub-badge pub-badge-compact"><span class="__dimensions_badge_embed__" data-doi="${paper.doi}" data-hide-zero-citations="true" data-style="small_rectangle" data-legend="never"></span></span>`;
+      }
+
       const titleHtml = doiUrl ? `<a href="${doiUrl}" target="_blank">${paper.title}</a>` : paper.title;
       const abstractMarkup = paper.abstract ? `<div class="pub-abstract">${paper.abstract}</div>` : '';
 
       return `
-        <div class="pub-item reveal">
+        <div class="pub-item">
           <span class="pub-year">${paper.year}</span>
           <div class="pub-content">
             <div class="pub-title">${titleHtml}</div>
@@ -135,19 +140,6 @@
           <div class="pub-meta">${metaHtml}</div>
         </div>`;
     }).join('');
-  }
-
-  function observeReveals() {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    }, { threshold: 0.08 });
-
-    document.querySelectorAll('.reveal:not(.observed)').forEach((element) => {
-      element.classList.add('observed');
-      io.observe(element);
-    });
   }
 
   function formatHighlightAuthors(authorsHtml) {
@@ -184,10 +176,10 @@
       const readLink = readUrl ? `<a class="highlight-card-link" href="${readUrl}" target="_blank">Read paper</a>` : '';
 
       return `
-        <article class="highlight-card reveal swiper-slide">
+        <article class="highlight-card swiper-slide">
           ${imageMarkup}
           <div class="highlight-card-title">${titleHtml}</div>
-          <div class="highlight-card-authors">${authorsText} — <em>${paper.journal}</em>, ${paper.year}</div>
+          <div class="highlight-card-authors">${authorsText}<br><em>${paper.journal}</em>, ${paper.year}</div>
           ${summaryMarkup}
           ${readLink}
         </article>`;
@@ -219,16 +211,6 @@
       initHighlightedCarousel();
 
       list.innerHTML = renderPapers(papers || []);
-      observeReveals();
-
-      const published = (papers || []).filter((paper) => paper.status === 'published' || paper.status === 'in_press');
-      const heroPubCount = document.getElementById('hero-pub-count');
-      const heroCitations = document.getElementById('hero-citations');
-      const heroHIndex = document.getElementById('hero-hindex');
-
-      if (heroPubCount) heroPubCount.textContent = published.length;
-      if (heroHIndex) heroHIndex.textContent = '—';
-      if (heroCitations) heroCitations.textContent = '—';
     } catch (error) {
       console.error(error);
       if (list) {
@@ -241,9 +223,7 @@
     const parts = ['georgedwood', '@', 'live', '.', 'co.uk'];
     const address = parts.join('');
     const contactEmail = document.getElementById('contact-email');
-    const heroEmail = document.getElementById('hero-email');
     if (contactEmail) contactEmail.href = 'mailto:' + address;
-    if (heroEmail) heroEmail.href = 'mailto:' + address;
   }
 
   function initHighlightedCarousel() {
@@ -270,12 +250,11 @@
         sensitivity: 10,
         },
       grabCursor: true,
-      snapToSlideEdge: true,
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
         },
-      ally: true,
+      a11y: true,
       breakpoints: {
         0: {
           spaceBetween: 10,
@@ -318,8 +297,7 @@
       { element: document.querySelector('header'), dark: true },
       { element: document.querySelector('#career'), dark: false },
       { element: document.querySelector('#publications'), dark: false },
-      { element: document.querySelector('#contact'), dark: false },
-      { element: document.querySelector('footer'), dark: true }
+      { element: document.querySelector('#contact'), dark: false }
     ].filter((target) => target.element);
 
     const observer = new IntersectionObserver((entries) => {
@@ -327,7 +305,7 @@
         if (entry.isIntersecting) {
           const isDark = targets.find((target) => target.element === entry.target)?.dark ?? true;
           root.style.setProperty('--nav-fg', isDark ? 'var(--mist)' : 'var(--forest)');
-          root.style.setProperty('--nav-bg', isDark ? 'rgba(26,46,38,0.82)' : 'rgba(245,242,238,0.82)');
+          root.style.setProperty('--nav-bg', isDark ? 'var(--ink)' : 'var(--paper)');
         }
       });
     }, {
@@ -339,7 +317,6 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    observeReveals();
     init();
     initNavColour();
     initHamburger();
