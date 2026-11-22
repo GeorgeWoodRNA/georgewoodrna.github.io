@@ -629,13 +629,20 @@ section {
   transition-delay: 0s;
 }
 
+/* hover teases: first three lines, fading out; a click reveals the rest */
 @media (hover: hover) and (pointer: fine) {
-  .pub-item:not(.dismissed):hover .pub-abstract {
-    max-height: var(--abs-h, 60rem);
+  .pub-item:not(.dismissed):not(.open):hover .pub-abstract {
+    max-height: min(var(--abs-h, 60rem), 5.1em);   /* 3 lines at line-height 1.7 */
     opacity: 1;
     visibility: visible;
     margin-top: 0.75rem;
     transition-delay: 0s;
+    -webkit-mask-image: linear-gradient(to bottom, #000 30%, transparent);
+    mask-image: linear-gradient(to bottom, #000 30%, transparent);
+  }
+
+  .pub-item:not(.open):hover .tag-abstract {
+    background: rgba(122,167,138,0.1);
   }
 }
 
