@@ -1,16 +1,15 @@
 ﻿:root {
-  --ochre: #E2A93B;       /* accent on dark green */
+  --clay: #E0937A;        /* accent on dark green */
   --bronze: #8A5A12;      /* accent on light paper */
   --paper: #EEF2EE;
   --moss: #476A55;        /* small text on paper */
-  --pill-h: 1.375rem;     /* shared height: tags + Dimensions pill */
   --mist: #E7EFE6;
   --sage: #7AA78A;
   --forest: #0F1F16;
   --ink: #1a2e26;
-  --nav-bg: var(--ink);
-  --swiper-navigation-sides-offset: 1rem;
-  --swiper-navigation-size: 25px;
+  --nav-bg: var(--ink);   /* --nav-bg / --nav-fg are switched by main.js */
+  --pill-h: 1.375rem;     /* shared height: tags + Dimensions pill */
+  --gutter: 5rem;         /* page side padding */
 }
 
 /* animatable angle for the citation pill's rainbow hover border */
@@ -39,7 +38,7 @@ html {
 body {
   background: var(--ink);
   color: var(--forest);
-  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  font-family: 'Public Sans', system-ui, sans-serif;
   font-weight: 400;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
@@ -47,19 +46,45 @@ body {
   max-width: 100%;
 }
 
+
+/* ===== Nav ===== */
+
 nav {
-  width: 100%;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 200;
-  padding: calc(1.6rem + env(safe-area-inset-top, 0px)) calc(5rem + env(safe-area-inset-right, 0px)) 1.8rem calc(5rem + env(safe-area-inset-left, 0px));
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  transition: color 0.4s, background 0.4s;
+  justify-content: space-between;
+  padding: calc(0.9rem + env(safe-area-inset-top, 0px)) calc(var(--gutter) + env(safe-area-inset-right, 0px)) 0.9rem calc(var(--gutter) + env(safe-area-inset-left, 0px));
   background: var(--nav-bg);
+  border-bottom: 1px solid transparent;
+  transition: color 0.3s, background 0.3s, border-color 0.3s;
+}
+
+nav.past-hero {
+  border-bottom-color: rgba(15,31,22,0.1);
+}
+
+/* name appears in the nav once the hero has scrolled away */
+.nav-name {
+  font-family: 'Libre Caslon Condensed', Georgia, serif;
+  font-weight: 500;
+  font-size: 1.15rem;
+  color: var(--nav-fg, var(--mist));
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s, color 0.3s;
+}
+
+nav.past-hero .nav-name {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
 }
 
 .nav-links {
@@ -69,7 +94,6 @@ nav {
 }
 
 .nav-links a {
-  font-family: 'IBM Plex Sans', system-ui, sans-serif;
   font-size: 0.95rem;
   font-weight: 500;
   color: var(--nav-fg, var(--mist));
@@ -84,57 +108,139 @@ nav {
   text-decoration: underline;
 }
 
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 14px 11px;     /* 44px tap target around the 22px icon */
+  margin: -14px -11px;
+  background: none;
+  border: none;
+  z-index: 250;
+}
+
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--nav-fg, var(--mist));
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease, background 0.4s;
+  transform-origin: center;
+}
+
+.nav-hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+  background: var(--clay);
+}
+
+.nav-hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+.nav-hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+  background: var(--clay);
+}
+
+.nav-mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  background: rgba(26,46,38,0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-100%);
+  visibility: hidden;   /* keeps closed links out of tab order and screen readers */
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s, visibility 0s linear 0.4s;
+}
+
+.nav-mobile-menu.open {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+  visibility: visible;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s, visibility 0s;
+}
+
+.nav-mobile-menu a {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 1.6rem;
+  color: var(--mist);
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.nav-mobile-menu a:hover {
+  opacity: 1;
+}
+
+
+/* ===== Hero: bio left (~1/3), selected work right (~2/3) =====
+   Both columns are the same height: the photo lines up with the
+   "Selected work" row and the interests end level with the cards. */
+
 header {
-  min-height: 75vh;
   display: grid;
-  grid-template-columns: 35% 65%;
-  position: relative;
-  overflow: hidden;
+  grid-template-columns: minmax(21rem, 1fr) 2fr;
+  align-items: stretch;
+  column-gap: 4.5rem;
+  padding: 5.5rem var(--gutter) 3.5rem;
+  background: var(--ink);
+  overflow: hidden;   /* crops the card row at the screen edge */
 }
 
 .hero-left {
-  background: var(--forest);
-  padding: 5rem;
-  padding-top: calc(3.5rem + env(safe-area-inset-top, 0px));
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  position: relative;
-  overflow: hidden;
 }
 
 .hero-profile {
   display: flex;
-  align-items: center;
-  gap: 2rem;
-  margin-bottom: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
 }
 
 .profile-pic {
-  position: relative;
-  z-index: 201;
-  width: 160px;
-  height: 160px;
+  display: block;
+  width: 96px;
+  height: 96px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid rgba(231,239,230,0.2);
-  display: block;
+  border: 1px solid rgba(231,239,230,0.2);
   background: rgba(122,167,138,0.15);
 }
 
 h1 {
-  font-family: 'IBM Plex Serif', Georgia, serif;
-  font-size: clamp(3.5rem, 5.5vw, 5.25rem);
-  font-weight: 400;
-  line-height: 1.05;
-  color: var(--paper);
+  font-family: 'Libre Caslon Condensed', Georgia, serif;
+  font-size: clamp(2.75rem, 4vw, 3.75rem);
+  font-weight: 500;
+  line-height: 1;
   letter-spacing: -0.02em;
-  position: relative;
-  z-index: 1;
+  color: var(--paper);
+}
+
+.hero-role {
+  margin-top: 0.6rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--clay);
 }
 
 .hero-bio {
-  margin-top: 2rem;
+  margin-top: 1.75rem;
   font-size: 0.98rem;
   line-height: 1.75;
   color: rgba(231,239,230,0.86);
@@ -145,8 +251,8 @@ h1 {
   list-style: none;
   display: grid;
   gap: 1rem;
-  margin-top: 2.5rem;
-  padding: 0;
+  margin-top: auto;     /* pushes the list to the bottom of the column */
+  padding-top: 2.25rem;
   color: rgba(231,239,230,0.88);
 }
 
@@ -161,95 +267,119 @@ h1 {
   width: 1.25rem;
   height: 1.25rem;
   flex-shrink: 0;
-  color: var(--ochre);
   margin-top: 0.15rem;
+  color: var(--clay);
 }
 
 .hero-right {
-  background: var(--ink);
-  position: relative;
-  overflow: hidden;
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 5rem;
+  min-width: 0;
 }
+
+
+/* ===== Selected work carousel (Swiper) ===== */
 
 .highlighted-work {
-  position: relative;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  touch-action: pan-y;
+  min-width: 0;
 }
 
+.hw-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
 
+.hw-controls {
+  display: flex;
+  gap: 0.5rem;
+}
 
+/* .section-label sets the base type; this must come after it */
+.highlight-slide-button {
+  --swiper-navigation-size: 14px;   /* arrow glyph size */
+  position: static;
+  width: 36px;
+  height: 36px;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(231,239,230,0.3);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--mist);
+  cursor: pointer;
+  transition: border-color 0.25s, color 0.25s, opacity 0.25s, visibility 0.25s;
+}
+
+.highlight-slide-button:hover {
+  border-color: var(--clay);
+  color: var(--clay);
+}
+
+.highlight-slide-button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* The row runs past the content column to the screen edge (header crops it),
+   so the next card peeks in without a fade. */
 .highlighted-work-frame {
+  flex: 1 1 auto;
+  display: flex;
+  width: calc(100% + var(--gutter));
+  min-width: 0;
+  min-height: 0;
+  margin-right: calc(-1 * var(--gutter));
   overflow: hidden;
-  padding-right: 3rem;
-  position: relative;
   touch-action: pan-y;
-}
-
-.highlighted-work-frame::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 0.75rem;
-  height: 100%;
-  pointer-events: none;
-  background: linear-gradient(to left, rgba(26,46,38,1) 0%, rgba(26,46,38,0) 100%);
 }
 
 .highlighted-work-row {
-  display: flex;
-  gap: 1.5rem;
+  height: auto;
   transition: transform 0.45s ease;
-  touch-action: pan-y;
-  align-items: stretch;
 }
 
-.highlighted-work-row .swiper-slide {
-  display: flex;
-  align-items: stretch;
-}
-
+/* card widths come from the content column (frame minus the bleed) */
 .highlight-card {
-  flex: 1 0 42.5%;
-  min-width: 42.5%;
-  background: var(--paper);
-  border-radius: 6px;
-  padding: 1.5rem;
+  flex: 0 0 calc((100% - var(--gutter)) * 0.46);
+  min-width: calc((100% - var(--gutter)) * 0.46);
+  height: auto;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  height: auto;
+  padding: 1.5rem;
+  border-radius: 6px;
+  background: var(--paper);
 }
 
+/* equal image frames so titles line up */
 .highlight-card-image {
-  position: relative;
-  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: 3px;
   background: #fff;
 }
 
-.highlight-card-image img,
-.highlight-card-image svg {
-  width: 100%;
-  display: block;
-}
-
 .highlight-card-image img {
-  height: auto;
+  display: block;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
 .highlight-card-title {
-  font-family: 'IBM Plex Serif', Georgia, serif;
+  font-family: 'Newsreader', Georgia, serif;
   font-size: 1.2rem;
-  line-height: 1.3;
   font-weight: 500;
+  line-height: 1.3;
   color: var(--forest);
 }
 
@@ -281,56 +411,16 @@ h1 {
   text-underline-offset: 0.25em;
 }
 
-.highlight-slide-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 46px;
-  height: 46px;
-  border: 1px solid rgba(15,31,22,0.15);
-  background: var(--paper);
-  color: var(--forest);
-  border-radius: 50%;
-  font-size: 1rem;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.25s, transform 0.25s, border-color 0.25s, opacity 0.25s, visibility 0.25s;
-  z-index: 10;
-}
 
-.highlight-slide-button:hover {
-  border-color: var(--ochre);
-}
-
-.highlight-slide-button:disabled {
-  opacity: 0.35;
-  cursor: default;
-  transform: translateY(-50%);
-}
-
-.highlight-slide-button-next {
-  right: -2rem;
-}
-
-.highlight-slide-button-prev {
-  left: -2rem;
-  right: auto;
-  opacity: 1;
-  visibility: visible;
-}
-
-.highlight-card-text-only .highlight-card-image {
-  display: none;
-}
+/* ===== Sections ===== */
 
 section {
-  padding: 4rem 5rem;
+  padding: 4rem var(--gutter);
+  scroll-margin-top: calc(5rem + env(safe-area-inset-top, 0px));   /* anchor jumps clear the fixed nav */
 }
 
 .section-label {
-  font-family: 'IBM Plex Serif', Georgia, serif;
+  font-family: 'Newsreader', Georgia, serif;
   font-size: 1.75rem;
   font-weight: 400;
   line-height: 1.2;
@@ -338,234 +428,23 @@ section {
   margin-bottom: 2rem;
 }
 
+/* "Selected work" sits on the dark hero. Box centring leaves the letters
+   ~3px high of the arrow buttons; nudge so cap-height centres on them. */
+.section-label.hero-eyebrow {
+  position: relative;
+  top: 0.13em;
+  color: var(--paper);
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+#career,
 #publications {
   background: var(--paper);
 }
 
-.pub-list {
-  display: flex;
-  flex-direction: column;
-}
 
-.pub-loading {
-  font-size: 0.95rem;
-  color: var(--moss);
-  padding: 3rem 0;
-  text-align: center;
-}
-
-.pub-item {
-  display: grid;
-  grid-template-columns: 3.5rem 1fr auto;
-  gap: 2.5rem;
-  align-items: start;
-  padding: 2rem 0;
-  border-bottom: 1px solid rgba(47,74,62,0.1);
-  position: relative;
-}
-
-.pub-year {
-  font-size: 0.95rem;
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
-  color: var(--moss);
-  padding-top: 0.2rem;
-}
-
-.pub-title {
-  font-family: 'IBM Plex Serif', Georgia, serif;
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: var(--forest);
-  line-height: 1.35;
-  margin-bottom: 0.45rem;
-}
-
-.pub-title a {
-  color: inherit;
-  text-decoration: none;
-  text-underline-offset: 0.2em;
-}
-
-.pub-title a:hover {
-  text-decoration: underline;
-  text-decoration-color: var(--bronze);
-}
-
-.pub-authors {
-  font-size: 0.9rem;
-  color: rgba(15,31,22,0.68);
-  line-height: 1.5;
-}
-
-.pub-authors strong {
-  color: var(--forest);
-  font-weight: 500;
-}
-
-.pub-abstract {
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition: max-height 0.35s ease, opacity 0.35s ease, margin-top 0.35s ease;
-  margin-top: 0;
-  color: rgba(15,31,22,0.8);
-  font-size: 0.95rem;
-  line-height: 1.7;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .pub-item:hover .pub-abstract {
-    max-height: 13rem;
-    opacity: 1;
-    margin-top: 0.75rem;
-  }
-}
-
-.pub-journal {
-  font-size: 0.92rem;
-  font-style: italic;
-  color: var(--moss);
-  margin-top: 0.35rem;
-}
-
-.pub-tags {
-  display: flex;
-  gap: 0.4rem;
-  margin-top: 0.6rem;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.pub-tag {
-  display: inline-flex;
-  align-items: center;
-  height: var(--pill-h);
-  line-height: 1;
-  font-size: 0.78rem;
-  font-weight: 500;
-  padding: 0 0.5rem;
-  border-radius: 3px;
-}
-
-.tag-first {
-  color: var(--bronze);
-  border: 1px solid rgba(138,90,18,0.4);
-}
-
-.tag-preprint {
-  color: var(--moss);
-  border: 1px solid rgba(71,106,85,0.35);
-  text-decoration: none;
-  transition: background 0.2s;
-}
-
-.tag-preprint:hover {
-  background: rgba(122,167,138,0.1);
-}
-
-.tag-review {
-  color: rgba(15,31,22,0.6);
-  border: 1px solid rgba(15,31,22,0.18);
-}
-
-.tag-in-press,
-.tag-accepted {
-  color: var(--moss);
-  border: 1px solid rgba(71,106,85,0.35);
-}
-
-.tag-first.tag-thesis {
-  color: var(--bronze);
-  border: 1px solid rgba(138,90,18,0.4);
-}
-
-.pub-meta {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.4rem;
-  min-width: 80px;
-}
-
-.pub-badge-compact {
-  display: none;
-}
-
-.pub-cite-pre {
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--moss);
-  background: rgba(122,167,138,0.08);
-  padding: 0.15rem 0.5rem;
-  white-space: nowrap;
-  text-decoration: none;
-  transition: background 0.2s;
-}
-
-.pub-cite-pre:hover {
-  background: rgba(122,167,138,0.15);
-}
-
-#contact {
-  background: var(--paper);
-  text-align: center;
-  padding: 7rem 5rem;
-  position: relative;
-}
-
-#contact::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 5rem;
-  right: 5rem;
-  height: 1px;
-  background: rgba(15,31,22,0.12);
-}
-
-#contact h2 {
-  font-family: 'IBM Plex Serif', Georgia, serif;
-  font-size: clamp(2.25rem, 4vw, 3.25rem);
-  font-weight: 400;
-  color: var(--forest);
-  margin-bottom: 1.5rem;
-}
-
-.contact-links {
-  display: flex;
-  gap: 0.75rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.contact-icon-link {
-  width: 54px;
-  height: 54px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(15,31,22,0.18);
-  border-radius: 50%;
-  color: var(--forest);
-  background: transparent;
-  transition: background 0.2s, border-color 0.2s;
-}
-
-.contact-icon-link:hover {
-  background: rgba(15,31,22,0.06);
-  border-color: var(--bronze);
-}
-
-.contact-icon-link svg {
-  width: 1rem;
-  height: 1rem;
-  fill: currentColor;
-}
-
-#career {
-  background: var(--paper);
-}
+/* ===== Career ===== */
 
 .career-grid {
   display: grid;
@@ -588,7 +467,6 @@ section {
   gap: 1.5rem;
   padding: 1.75rem 0;
   border-bottom: 1px solid rgba(15,31,22,0.07);
-  position: relative;
 }
 
 .career-item:last-child {
@@ -599,9 +477,9 @@ section {
   font-size: 0.95rem;
   font-weight: 500;
   font-variant-numeric: tabular-nums;
+  line-height: 1.5;
   color: var(--moss);
   padding-top: 0.2rem;
-  line-height: 1.5;
 }
 
 .career-entry {
@@ -615,18 +493,15 @@ section {
   width: 50px;
   height: 50px;
   object-fit: contain;
-  filter: none;
-  opacity: 1;
   mix-blend-mode: multiply;
-  background: transparent;
 }
 
 .career-role {
-  font-family: 'IBM Plex Serif', Georgia, serif;
+  font-family: 'Newsreader', Georgia, serif;
   font-size: 1.2rem;
   font-weight: 500;
-  color: var(--forest);
   line-height: 1.25;
+  color: var(--forest);
   margin-bottom: 0.3rem;
 }
 
@@ -646,142 +521,298 @@ section {
 
 .career-tag {
   display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.1rem 0.4rem;
   font-size: 0.78rem;
   font-weight: 500;
   color: var(--bronze);
   border: 1px solid rgba(138,90,18,0.4);
   border-radius: 3px;
-  padding: 0.1rem 0.4rem;
-  margin-top: 0.5rem;
 }
 
-.nav-hamburger {
-  display: none;
+
+/* ===== Publications ===== */
+
+.pub-list {
+  display: flex;
   flex-direction: column;
-  gap: 5px;
+}
+
+.pub-loading {
+  padding: 3rem 0;
+  font-size: 0.95rem;
+  text-align: center;
+  color: var(--moss);
+}
+
+.pub-item {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr auto;
+  gap: 2.5rem;
+  align-items: start;
+  padding: 2rem 0;
+  border-bottom: 1px solid rgba(47,74,62,0.1);
+}
+
+.pub-year {
+  font-size: 0.95rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--moss);
+  padding-top: 0.2rem;
+}
+
+.pub-title {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--forest);
+  margin-bottom: 0.45rem;
+}
+
+.pub-title a {
+  color: inherit;
+  text-decoration: none;
+  text-underline-offset: 0.2em;
+}
+
+.pub-title a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--bronze);
+}
+
+.pub-authors {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: rgba(15,31,22,0.68);
+}
+
+.pub-authors strong {
+  font-weight: 500;
+  color: var(--forest);
+}
+
+/* abstract previews on hover (desktop) and stays open when the item is clicked;
+   --abs-h is the abstract's full height, set by main.js */
+.pub-item.has-abstract {
   cursor: pointer;
-  padding: 4px;
-  background: none;
-  border: none;
-  z-index: 250;
 }
 
-.nav-hamburger span {
-  display: block;
-  width: 22px;
-  height: 2px;
-  background: var(--nav-fg, var(--mist));
-  border-radius: 2px;
-  transition: transform 0.3s ease, opacity 0.3s ease, background 0.4s;
-  transform-origin: center;
-}
-
-.nav-hamburger.open span:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
-  background: var(--ochre);
-}
-
-.nav-hamburger.open span:nth-child(2) {
+.pub-abstract {
+  max-height: 0;
   opacity: 0;
-  transform: translateX(-10px);
+  overflow: hidden;
+  margin-top: 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: rgba(15,31,22,0.8);
+  transition: max-height 0.35s ease, opacity 0.35s ease, margin-top 0.35s ease;
 }
 
-.nav-hamburger.open span:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
-  background: var(--ochre);
+.pub-item.open .pub-abstract {
+  max-height: var(--abs-h, 60rem);
+  opacity: 1;
+  margin-top: 0.75rem;
 }
 
-.nav-mobile-menu {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 150;
+@media (hover: hover) and (pointer: fine) {
+  .pub-item:not(.dismissed):hover .pub-abstract {
+    max-height: var(--abs-h, 60rem);
+    opacity: 1;
+    margin-top: 0.75rem;
+  }
+}
+
+.pub-journal {
+  margin-top: 0.35rem;
+  font-size: 0.92rem;
+  font-style: italic;
+  color: var(--moss);
+}
+
+.pub-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+}
+
+.pub-tag {
+  display: inline-flex;
+  align-items: center;
+  height: var(--pill-h);
+  padding: 0 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  line-height: 1;
+  border-radius: 3px;
+}
+
+.tag-first {
+  color: var(--bronze);
+  border: 1px solid rgba(138,90,18,0.4);
+}
+
+.tag-preprint,
+.tag-in-press,
+.tag-accepted {
+  color: var(--moss);
+  border: 1px solid rgba(71,106,85,0.35);
+}
+
+.tag-preprint {
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.tag-preprint:hover {
+  background: rgba(122,167,138,0.1);
+}
+
+.tag-review {
+  color: rgba(15,31,22,0.6);
+  border: 1px solid rgba(15,31,22,0.18);
+}
+
+/* desktop: full Dimensions badge in the right-hand column */
+.pub-meta {
+  display: flex;
   flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+  min-width: 80px;
+}
+
+/* mobile: compact citation pill among the tags (see the 900px query) */
+.pub-badge-compact {
+  display: none;
+}
+
+.pub-cite-pre {
+  padding: 0.15rem 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--moss);
+  background: rgba(122,167,138,0.08);
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.pub-cite-pre:hover {
+  background: rgba(122,167,138,0.15);
+}
+
+
+/* ===== Contact ===== */
+
+#contact {
+  position: relative;
+  padding: 7rem var(--gutter);
+  text-align: center;
+  background: var(--paper);
+}
+
+/* hairline between publications and contact, inset to the page gutters */
+#contact::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: var(--gutter);
+  right: var(--gutter);
+  height: 1px;
+  background: rgba(15,31,22,0.12);
+}
+
+#contact h2 {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: clamp(2.25rem, 4vw, 3.25rem);
+  font-weight: 400;
+  color: var(--forest);
+  margin-bottom: 1.5rem;
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.contact-icon-link {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 2.5rem;
-  background: rgba(26,46,38,0.96);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(-100%);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
+  width: 54px;
+  height: 54px;
+  border: 1px solid rgba(15,31,22,0.18);
+  border-radius: 50%;
+  color: var(--forest);
+  transition: background 0.2s, border-color 0.2s;
 }
 
-.nav-mobile-menu.open {
-  opacity: 1;
-  pointer-events: all;
-  transform: translateY(0);
+.contact-icon-link:hover {
+  background: rgba(15,31,22,0.06);
+  border-color: var(--bronze);
 }
 
-.nav-mobile-menu a {
-  font-family: 'IBM Plex Serif', Georgia, serif;
-  font-size: 1.6rem;
-  color: var(--mist);
-  text-decoration: none;
-  opacity: 0.7;
-  transition: opacity 0.2s;
+.contact-icon-link svg {
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
 }
 
-.nav-mobile-menu a:hover {
-  opacity: 1;
+
+/* ===== Focus rings: forest on light surfaces (15:1), clay on dark (5.9:1) ===== */
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--forest);
+  outline-offset: 3px;
 }
 
-/* Wide screens: photo sits beside the name, so keep the name clear of the nav
-   and lift only the photo to overlap it */
-@media (min-width: 1651px) {
-  .hero-left {
-    padding-top: calc(6.25rem + env(safe-area-inset-top, 0px));
+header a:focus-visible,
+header button:focus-visible,
+.nav-mobile-menu a:focus-visible {
+  outline-color: var(--clay);
+}
+
+nav a:focus-visible,
+nav button:focus-visible {
+  outline-color: var(--nav-fg, var(--mist));
+}
+
+.highlight-card a:focus-visible {
+  outline-color: var(--forest);
+}
+
+
+/* ===== Wide screens: narrower bio column + wider cards keep the heights close ===== */
+
+@media (min-width: 1600px) {
+  header {
+    grid-template-columns: minmax(21rem, 1fr) 2.5fr;
   }
 
-  .hero-profile {
-    align-items: flex-start;
-  }
-
-  .profile-pic {
-    margin-top: -2.75rem;
+  .highlight-card {
+    flex-basis: calc((100% - var(--gutter)) * 0.44);
+    min-width: calc((100% - var(--gutter)) * 0.44);
   }
 }
 
-@media (max-width: 1650px) and (min-width: 901px) {
-  .hero-profile {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 1rem;
-  }
 
-  .hero-profile h1 {
-    width: 100%;
-    margin: 0;
-  }
-
-  h1 {
-    font-size: clamp(4rem, 5vw, 5.5rem);
-  }
-}
+/* ===== Tablet and phone: one column, Selected work below the bio ===== */
 
 @media (max-width: 900px) {
-  header {
-    grid-template-columns: 1fr;
-    min-height: auto;
-  }
-
-  .hero-right {
-    min-height: auto;
-    padding: 2rem;
+  :root {
+    --gutter: 2rem;
   }
 
   nav {
-    padding: calc(1.2rem + env(safe-area-inset-top, 0px)) calc(1.25rem + env(safe-area-inset-right, 0px)) 1.2rem calc(1.25rem + env(safe-area-inset-left, 0px));
-    width: 100%;
-    max-width: 100%;
-    left: 0;
-    right: 0;
+    padding-left: calc(1.25rem + env(safe-area-inset-left, 0px));
+    padding-right: calc(1.25rem + env(safe-area-inset-right, 0px));
   }
 
   .nav-links {
@@ -793,46 +824,41 @@ section {
     display: flex;
   }
 
-  section {
-    padding: 5rem 2rem;
+  header {
+    grid-template-columns: 1fr;
+    row-gap: 3rem;
+    padding: 5.5rem var(--gutter) 3rem;
   }
 
   .hero-left {
-    padding: calc(2.6rem + env(safe-area-inset-top, 0px)) 2rem 4rem;
-  }
-
-  .hero-profile {
-    flex-direction: row;
-    align-items: center;
-    text-align: left;
-    gap: 1.25rem;
-  }
-
-  .hero-profile h1 {
-    max-width: 10rem;
-    margin: 0;
-  }
-
-  .hero-profile h1 span {
     display: block;
-    margin-top: 0.15rem;
   }
 
-  .highlighted-work-frame {
-    padding-right: 0;
-  }
-
-  .highlighted-work-row {
-    gap: 1rem;
+  .hero-interests {
+    margin-top: 2rem;
+    padding-top: 0;
   }
 
   .highlight-card {
-    flex: 0 0 86%;
-    min-width: 86%;
+    flex-basis: calc((100% - var(--gutter)) * 0.88);
+    min-width: calc((100% - var(--gutter)) * 0.88);
   }
 
-  .contact-links {
-    justify-content: center;
+  section {
+    padding: 5rem var(--gutter);
+  }
+
+  #contact {
+    padding: 7rem 5rem;
+  }
+
+  #contact::before {
+    left: 5rem;
+    right: 5rem;
+  }
+
+  .career-grid {
+    grid-template-columns: 1fr;
   }
 
   .pub-item {
@@ -840,18 +866,17 @@ section {
     row-gap: 0;
   }
 
-  .pub-cite-pre {
-    margin-top: 0.6rem;
-  }
-
   .pub-meta {
-    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
     grid-column: 2;
     gap: 0.5rem;
     min-width: 0;
+  }
+
+  .pub-cite-pre {
+    margin-top: 0.6rem;
   }
 
   .pub-badge-wide {
@@ -880,12 +905,12 @@ section {
   }
 
   .pub-badge-compact .__dimensions_Badge_Image {
+    --logo: 1.05rem;
     position: relative;
     display: inline-flex !important;
     align-items: center;
     width: auto !important;
     height: 100% !important;
-    box-sizing: border-box;
     border: 1px solid rgba(71,106,85,0.35);
     border-radius: 3px;
     overflow: hidden;
@@ -895,7 +920,7 @@ section {
   .pub-badge-compact .__dimensions_Badge_Image::before {
     content: "Citations";
     padding: 0 0.5rem 0 1.6rem;
-    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-family: 'Public Sans', system-ui, sans-serif;
     font-size: 0.78rem;
     font-weight: 500;
     line-height: 1;
@@ -905,10 +930,6 @@ section {
   /* SVG kept only for the logo, shown whole and centred in the pill.
      The logo shape spans x -5..104, y -13..100 in the SVG's 440x90 viewBox,
      so the SVG overflows visibly and is offset to centre that shape. */
-  .pub-badge-compact .__dimensions_Badge_Image {
-    --logo: 1.05rem;
-  }
-
   .pub-badge-compact .__dimensions_Badge_Image svg {
     position: absolute;
     overflow: visible;
@@ -933,6 +954,7 @@ section {
 
   .pub-badge-compact .__dimensions_Badge_Image svg .__db_shape {
     opacity: 0.8;
+    transition: opacity 0.25s;
   }
 
   .pub-badge-compact .__db_score {
@@ -946,7 +968,7 @@ section {
     margin: 0 !important;
     padding: 0 0.5rem;
     background: transparent !important;
-    font-family: 'IBM Plex Sans', system-ui, sans-serif !important;
+    font-family: 'Public Sans', system-ui, sans-serif !important;
     font-size: 0.78rem !important;
     font-weight: 500 !important;
     line-height: 1 !important;
@@ -964,11 +986,7 @@ section {
     background: rgba(71,106,85,0.35);
   }
 
-  /* Hover / focus: rainbow border in the Dimensions logo colours, slowly rotating */
-  .pub-badge-compact .__dimensions_Badge_Image svg .__db_shape {
-    transition: opacity 0.25s;
-  }
-
+  /* hover / focus: rainbow border in the Dimensions logo colours, slowly rotating */
   .pub-badge-compact .__dimensions_Link:hover .__dimensions_Badge_Image,
   .pub-badge-compact .__dimensions_Link:focus-visible .__dimensions_Badge_Image {
     border-color: transparent;
@@ -983,38 +1001,35 @@ section {
   .pub-badge-compact .__dimensions_Link:focus-visible .__db_shape {
     opacity: 1;
   }
-
-  .career-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 600px) {
-  .profile-pic {
-    width: 100px;
-    height: 100px;
+  :root {
+    --gutter: 1.25rem;
+  }
+
+  header {
+    padding: 5.25rem var(--gutter) 2.5rem;
   }
 
   .hero-profile {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 0.75rem;
+    gap: 1.1rem;
   }
 
-  .hero-profile h1 {
-    max-width: 100%;
+  .profile-pic {
+    width: 80px;
+    height: 80px;
   }
 
-  .hero-profile h1 span {
-    display: block;
-    margin-top: 0.15rem;
+  h1 {
+    font-size: 2.6rem;
+  }
+
+  section {
+    padding: 5rem 2rem;
   }
 
   .career-entry {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
     margin-left: -4rem;
   }
 
@@ -1023,49 +1038,10 @@ section {
   }
 }
 
-@media (max-width: 370px) {
-  .hero-left {
-    padding: calc(2.6rem + env(safe-area-inset-top, 0px)) 1.25rem 3rem;
-  }
-
-  .hero-profile {
-    gap: 0.75rem;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  h1 {
-    font-size: clamp(3rem, 8vw, 4rem);
-  }
-
-  .hero-profile h1 {
-    max-width: 100%;
-  }
-
-  .hero-profile h1 span {
-    display: block;
-    margin-top: 0.15rem;
-  }
-}
-
-a:focus-visible,
-button:focus-visible {
-  outline: 2px solid var(--ochre);
-  outline-offset: 3px;
-}
-
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }
-}
-
-/* "Selected work" sits on the dark hero; must follow .section-label */
-.section-label.hero-eyebrow {
-  color: var(--paper);
-  font-size: 1.4rem;
-  margin-bottom: 1.5rem;
 }
