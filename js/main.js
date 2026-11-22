@@ -215,6 +215,7 @@
       ]);
 
       renderExperience(workExperience.experience || [], workExperience.education || []);
+      initCareerExpand();
       renderHighlightedWork(papers || []);
       initHighlightedCarousel();
 
@@ -229,6 +230,51 @@
         list.innerHTML = '<div class="pub-loading">Unable to load publications data.</div>';
       }
     }
+  }
+
+  // Phones (<=600px): career descriptions are hidden; tapping an entry shows
+  // it, tapping again hides it. No visual indicator, but the entries are
+  // keyboard/screen-reader operable (role=button + aria-expanded) on phones.
+  function initCareerExpand() {
+    const mq = window.matchMedia('(max-width: 600px)');
+    const items = [...document.querySelectorAll('#career .career-item')].filter((item) => item.querySelector('.career-desc'));
+    if (!items.length) return;
+
+    const sync = () => {
+      items.forEach((item) => {
+        if (mq.matches) {
+          item.setAttribute('role', 'button');
+          item.setAttribute('tabindex', '0');
+          item.setAttribute('aria-expanded', String(item.classList.contains('open')));
+        } else {
+          item.removeAttribute('role');
+          item.removeAttribute('tabindex');
+          item.removeAttribute('aria-expanded');
+        }
+      });
+    };
+
+    const toggle = (item) => {
+      const desc = item.querySelector('.career-desc');
+      item.style.setProperty('--desc-h', `${desc.scrollHeight}px`);
+      const open = !item.classList.contains('open');
+      item.classList.toggle('open', open);
+      item.setAttribute('aria-expanded', String(open));
+    };
+
+    items.forEach((item) => {
+      item.addEventListener('click', () => {
+        if (mq.matches) toggle(item);
+      });
+      item.addEventListener('keydown', (event) => {
+        if (!mq.matches || (event.key !== 'Enter' && event.key !== ' ')) return;
+        event.preventDefault();
+        toggle(item);
+      });
+    });
+
+    sync();
+    mq.addEventListener('change', sync);
   }
 
   // Abstracts preview on hover (desktop) and stay open once an item is

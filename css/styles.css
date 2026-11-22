@@ -894,6 +894,18 @@ nav button:focus-visible {
     display: block;
   }
 
+  /* name and role on the left, photo on the right */
+  .hero-profile {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .profile-pic {
+    order: 2;
+    flex-shrink: 0;
+  }
+
   .hero-interests {
     margin-top: 2rem;
     padding-top: 0;
@@ -1098,8 +1110,30 @@ nav button:focus-visible {
     margin-left: -4rem;
   }
 
+  /* descriptions open on tap (main.js); no indicator by design */
+  .career-item {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* keyboard focus only (not shown on tap) */
+  .career-item:focus-visible {
+    outline: 2px solid var(--forest);
+    outline-offset: 2px;
+  }
+
   .career-desc {
-    display: none;
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transition: max-height 0.35s ease, opacity 0.35s ease, visibility 0s linear 0.35s;
+  }
+
+  .career-item.open .career-desc {
+    max-height: var(--desc-h, 30rem);
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
   }
 }
 
