@@ -35,6 +35,15 @@ html {
   max-width: 100%;
 }
 
+/* balanced ragged edges and no one-word last lines in running text */
+p,
+.hero-bio,
+.highlight-card-summary,
+.career-desc,
+.pub-abstract {
+  text-wrap: pretty;
+}
+
 body {
   background: var(--ink);
   color: var(--forest);
