@@ -452,6 +452,16 @@ section {
   background: var(--paper);
 }
 
+/* Career and Publications share a background, so their paddings would stack
+   (plus the last career entry's own padding); keep the break to ~100px */
+#career {
+  padding-bottom: 2rem;
+}
+
+#publications {
+  padding-top: 2.5rem;
+}
+
 
 /* ===== Career ===== */
 
