@@ -9,7 +9,7 @@
   --ink: #1a2e26;
   --nav-bg: var(--ink);   /* --nav-bg / --nav-fg are switched by main.js */
   --pill-h: 1.375rem;     /* shared height: tags + Dimensions pill */
-  --gutter: 5rem;         /* page side padding */
+  --gutter: max(5rem, calc((100vw - 1600px) / 2));   /* page side padding; caps content at 1600px on huge screens */
 }
 
 /* animatable angle for the citation pill's rainbow hover border */
