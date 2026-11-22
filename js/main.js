@@ -81,7 +81,7 @@
       return (b.firstAuthor ? 1 : 0) - (a.firstAuthor ? 1 : 0);
     });
 
-    return sorted.map((paper) => {
+    return sorted.map((paper, index) => {
       const doiUrl = paper.doi ? `https://doi.org/${paper.doi}` : null;
       const preprintUrl = paper.preprintDoi ? `https://doi.org/${paper.preprintDoi}` : null;
       const status = paper.status || 'published';
@@ -119,13 +119,18 @@
         }
       }
 
+      const abstractId = `abstract-${index}`;
+      if (paper.abstract) {
+        tags += `<button class="pub-tag tag-abstract" type="button" aria-expanded="false" aria-controls="${abstractId}">Abstract</button>`;
+      }
+
       // Mobile: compact "Citations | n" pill sits with the tags; CSS shows it or the round badge
       if (paper.doi) {
         tags += `<span class="pub-badge pub-badge-compact"><span class="__dimensions_badge_embed__" data-doi="${paper.doi}" data-hide-zero-citations="true" data-style="small_rectangle" data-legend="never"></span></span>`;
       }
 
       const titleHtml = doiUrl ? `<a href="${doiUrl}" target="_blank">${paper.title}</a>` : paper.title;
-      const abstractMarkup = paper.abstract ? `<div class="pub-abstract">${paper.abstract}</div>` : '';
+      const abstractMarkup = paper.abstract ? `<div class="pub-abstract" id="${abstractId}">${paper.abstract}</div>` : '';
 
       return `
         <div class="pub-item${paper.abstract ? ' has-abstract' : ''}">
@@ -226,8 +231,9 @@
   }
 
   // Abstracts preview on hover (desktop) and stay open once an item is
-  // clicked or tapped; clicking again closes. Each item's --abs-h holds its
-  // abstract's full height so the open transition never cuts text off.
+  // clicked or tapped; clicking again closes. The "Abstract" button is the
+  // accessible control (aria-expanded; keyboard via Enter/Space). Each item's
+  // --abs-h holds its abstract's full height so opening never cuts text off.
   function initPubAbstracts(list) {
     const items = [...list.querySelectorAll('.pub-item.has-abstract')];
     if (!items.length) return;
@@ -253,9 +259,11 @@
     list.addEventListener('click', (event) => {
       const item = event.target.closest('.pub-item.has-abstract');
       if (!item || event.target.closest('a, .pub-badge')) return;
-      if (String(window.getSelection())) return;   // selecting text, not toggling
+      const viaButton = event.target.closest('.tag-abstract');
+      if (!viaButton && String(window.getSelection())) return;   // selecting text, not toggling
       const open = !item.classList.contains('open');
       item.classList.toggle('open', open);
+      item.querySelector('.tag-abstract').setAttribute('aria-expanded', String(open));
       // closing while the pointer is still over the item shouldn't fall back to the hover preview
       item.classList.toggle('dismissed', !open);
     });

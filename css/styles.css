@@ -603,7 +603,8 @@ section {
 }
 
 /* abstract previews on hover (desktop) and stays open when the item is clicked;
-   --abs-h is the abstract's full height, set by main.js */
+   --abs-h is the abstract's full height, set by main.js. Closed abstracts are
+   visibility: hidden so screen readers skip them until the button opens them. */
 .pub-item.has-abstract {
   cursor: pointer;
 }
@@ -611,25 +612,30 @@ section {
 .pub-abstract {
   max-height: 0;
   opacity: 0;
+  visibility: hidden;
   overflow: hidden;
   margin-top: 0;
   font-size: 0.95rem;
   line-height: 1.7;
   color: rgba(15,31,22,0.8);
-  transition: max-height 0.35s ease, opacity 0.35s ease, margin-top 0.35s ease;
+  transition: max-height 0.35s ease, opacity 0.35s ease, margin-top 0.35s ease, visibility 0s linear 0.35s;
 }
 
 .pub-item.open .pub-abstract {
   max-height: var(--abs-h, 60rem);
   opacity: 1;
+  visibility: visible;
   margin-top: 0.75rem;
+  transition-delay: 0s;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .pub-item:not(.dismissed):hover .pub-abstract {
     max-height: var(--abs-h, 60rem);
     opacity: 1;
+    visibility: visible;
     margin-top: 0.75rem;
+    transition-delay: 0s;
   }
 }
 
@@ -677,6 +683,35 @@ section {
 }
 
 .tag-preprint:hover {
+  background: rgba(122,167,138,0.1);
+}
+
+.tag-abstract {
+  gap: 0.35rem;
+  color: var(--moss);
+  border: 1px solid rgba(71,106,85,0.35);
+  background: none;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+/* chevron: points down when closed, up when open */
+.tag-abstract::after {
+  content: '';
+  width: 0.38em;
+  height: 0.38em;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-0.12em) rotate(45deg);
+  transition: transform 0.25s;
+}
+
+.tag-abstract[aria-expanded="true"]::after {
+  transform: translateY(0.1em) rotate(-135deg);
+}
+
+.tag-abstract:hover {
   background: rgba(122,167,138,0.1);
 }
 
