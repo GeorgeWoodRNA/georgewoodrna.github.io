@@ -534,7 +534,7 @@ section {
   font-size: 0.9rem;
   line-height: 1.7;
   color: rgba(15,31,22,0.72);
-  max-width: 68ch;
+  max-width: 90ch;      /* comfortable line length, without wrapping early on wide screens */
 }
 
 .career-tag {
